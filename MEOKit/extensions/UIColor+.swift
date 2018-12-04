@@ -10,15 +10,19 @@ import UIKit
 
 extension UIColor{
     
+    /// RBGAでUIColorを生成する
     public static func RGBA(r:Int, g:Int, b:Int, a:Int=1) -> UIColor{
         return UIColor(red: CGFloat(r)/255.0,
-                       green: CGFloat(b)/255.0,
+                       green: CGFloat(g)/255.0,
                        blue: CGFloat(b)/255.0,
                        alpha: CGFloat(a))
     }
     
+    /// 16進数でUIColorを生成する
     public static func HEX(hexCode: String) -> UIColor{
         let (r, g, b) = hexCode2RGB(hexCode: hexCode)
+        print(r, g, b)
+        
         return RGBA(r: r, g: g, b: b)
     }
     
@@ -30,6 +34,7 @@ extension UIColor{
                 colorCode.replaceSubrange(range, with: "")
             }
         }
+        print(colorCode)
         
         let rv:Int? = colorCode.sub(startIndex: 0, length: 2).hexToInt()
         let gv:Int? = colorCode.sub(startIndex: 2, length: 2).hexToInt()

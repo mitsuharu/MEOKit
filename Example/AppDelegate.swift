@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  Exsample
+//  Example
 //
-//  Created by Mitsuharu Emoto on 2018/12/04.
+//  Created by Mitsuhau Emoto on 2018/12/04.
 //  Copyright © 2018 Mitsuharu Emoto. All rights reserved.
 //
 

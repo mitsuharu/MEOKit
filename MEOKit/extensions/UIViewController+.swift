@@ -10,6 +10,7 @@ import UIKit
 
 extension UIViewController {
     
+    /// storyboardから生成する
     public static func instantiate(storyboardName:String? = nil,
                                    storyboardId:String? = nil) -> Self{
         return instantiateHelper(storyboardName: storyboardName, storyboardId: storyboardId)

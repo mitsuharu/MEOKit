@@ -9,7 +9,8 @@
 import UIKit
 
 extension NSObject {
-        
+    
+    /// クラス名を取得する
     public var className: String {
         get {
             var name = String(describing: type(of: self))

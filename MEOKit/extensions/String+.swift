@@ -10,7 +10,7 @@ import UIKit
 
 extension String {
 
-    // MD5で暗号化する
+    /// MD5で暗号化する
     public func md5() -> String {
         let data = self.data(using: .utf8)!
         var digest = [UInt8](repeating: 0, count: Int(CC_MD5_DIGEST_LENGTH))

@@ -1,15 +1,15 @@
 //
-//  ExsampleTests.swift
-//  ExsampleTests
+//  ExampleTests.swift
+//  ExampleTests
 //
-//  Created by Mitsuharu Emoto on 2018/12/04.
+//  Created by Mitsuhau Emoto on 2018/12/04.
 //  Copyright © 2018 Mitsuharu Emoto. All rights reserved.
 //
 
 import XCTest
-@testable import Exsample
+@testable import Example
 
-class ExsampleTests: XCTestCase {
+class ExampleTests: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.

@@ -8,16 +8,20 @@
 
 import UIKit
 
+/// トースター表示を行う
 public class Toast: NSObject {
 
     private var label: PaddingLabel!
-    private let timeInterval: TimeInterval = 1.0
+    private let timeInterval: TimeInterval = 2.0
+    private let hiddenTimeInterval: TimeInterval = 1.0
     private static var shared: Toast = Toast()
     
+    /// トースターを表示する
     public static func show(text:String){
         Toast.shared.show(text: text)
     }
     
+    /// トースターを消す
     public static func remove(isAnimated: Bool = false){
         Toast.shared.remove(isAnimated: isAnimated)
     }
@@ -31,8 +35,9 @@ public class Toast: NSObject {
         let width = UIScreen.main.bounds.width
         let height = UIScreen.main.bounds.height
         let w = width * 0.8
+        let rect = CGRect(x: 0, y: 0, width: width, height: 16)
         
-        self.label = PaddingLabel(frame: CGRect(x: 0, y: 0, width: width, height: 16))
+        self.label = PaddingLabel(frame: rect)
         self.label.backgroundColor = UIColor.gray
         self.label.textColor = UIColor.white
         self.label.radius = 5
@@ -66,7 +71,7 @@ public class Toast: NSObject {
         
         var dur = 0.0
         if isAnimated{
-            dur = self.timeInterval
+            dur = self.hiddenTimeInterval
         }
         
         UIView.animate(withDuration: dur,

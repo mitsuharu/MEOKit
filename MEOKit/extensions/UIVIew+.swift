@@ -9,7 +9,8 @@
 import UIKit
 
 extension UIView {
-        
+    
+    /// nibファイルから生成する
     public static func instantiate(nibName:String? = nil) -> Self{
         return instantiateHelper(nibName: nibName)
     }
@@ -35,7 +36,7 @@ extension UIView {
 
 extension UIView{
     
-    // autolayoutで組んで生成したViewのサイズを取得する
+    /// autolayoutで組んで生成したViewのサイズを取得する
     public func getAutolayoutedSize(fixedWidth:CGFloat? = nil) -> CGSize{
         /*
          see:【AutoLayout】systemLayoutSizeFittingSizeでもう悩まない！ - Qiita
