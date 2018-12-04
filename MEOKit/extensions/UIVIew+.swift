@@ -30,6 +30,32 @@ extension UIView {
         let result = v as! T
         return result
     }
+}
 
+
+extension UIView{
+    
+    // autolayoutで組んで生成したViewのサイズを取得する
+    public func getAutolayoutedSize(fixedWidth:CGFloat? = nil) -> CGSize{
+        /*
+         see:【AutoLayout】systemLayoutSizeFittingSizeでもう悩まない！ - Qiita
+         https://qiita.com/netetahito/items/8b363d4c7fe5f1ca5636
+         */
+        
+        var size:CGSize = CGSize.zero
+        
+        if let w = fixedWidth{
+            size = self.systemLayoutSizeFitting(CGSize(width: w, height: 0),
+                                                withHorizontalFittingPriority: UILayoutPriority.required, verticalFittingPriority: UILayoutPriority.fittingSizeLevel)
+        }else{
+            size = self.systemLayoutSizeFitting(UIView.layoutFittingExpandedSize)
+        }
+        
+        let w = CGFloat(ceilf(Float(size.width)))
+        let h = CGFloat(ceilf(Float(size.height)))
+        let size2:CGSize = CGSize(width: w, height: h)
+        
+        return size2
+    }
     
 }

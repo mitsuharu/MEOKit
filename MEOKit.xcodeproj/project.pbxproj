@@ -29,6 +29,9 @@
 		9BADA06021B6298700501380 /* SampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BADA05C21B6298700501380 /* SampleView.swift */; };
 		9BADA06121B62A8800501380 /* MEOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BAD9F9821B5FC7400501380 /* MEOKit.framework */; };
 		9BADA06221B62A8800501380 /* MEOKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9BAD9F9821B5FC7400501380 /* MEOKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9BADA0B621B64F6800501380 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BADA0B521B64F6800501380 /* String+.swift */; };
+		9BADA0BB21B6537300501380 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BADA0BA21B6537300501380 /* PaddingLabel.swift */; };
+		9BADA0BF21B6570A00501380 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BADA0BE21B6570A00501380 /* Toast.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +109,9 @@
 		9BADA05A21B6298700501380 /* SampleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SampleView.xib; sourceTree = "<group>"; };
 		9BADA05B21B6298700501380 /* SampleViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SampleViewController.storyboard; sourceTree = "<group>"; };
 		9BADA05C21B6298700501380 /* SampleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleView.swift; sourceTree = "<group>"; };
+		9BADA0B521B64F6800501380 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		9BADA0BA21B6537300501380 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
+		9BADA0BE21B6570A00501380 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +183,8 @@
 			isa = PBXGroup;
 			children = (
 				9BAD9FEC21B6020E00501380 /* extensions */,
+				9BADA0BC21B656DF00501380 /* objs */,
+				9BADA0B921B6535A00501380 /* views */,
 				9BAD9F9B21B5FC7400501380 /* MEOKit.h */,
 				9BAD9F9C21B5FC7400501380 /* Info.plist */,
 			);
@@ -201,6 +209,7 @@
 				9BADA00A21B61B6700501380 /* UITableViewCell+.swift */,
 				9BADA00B21B61B6700501380 /* UIVIew+.swift */,
 				9BADA00921B61B6700501380 /* UIViewController+.swift */,
+				9BADA0B521B64F6800501380 /* String+.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -246,6 +255,30 @@
 				9BADA05C21B6298700501380 /* SampleView.swift */,
 			);
 			path = temp;
+			sourceTree = "<group>";
+		};
+		9BADA0B921B6535A00501380 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				9BADA0BA21B6537300501380 /* PaddingLabel.swift */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		9BADA0BC21B656DF00501380 /* objs */ = {
+			isa = PBXGroup;
+			children = (
+				9BADA0BD21B656FA00501380 /* toast */,
+			);
+			path = objs;
+			sourceTree = "<group>";
+		};
+		9BADA0BD21B656FA00501380 /* toast */ = {
+			isa = PBXGroup;
+			children = (
+				9BADA0BE21B6570A00501380 /* Toast.swift */,
+			);
+			path = toast;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -457,7 +490,10 @@
 				9BADA00C21B61B6700501380 /* UIImage+.swift in Sources */,
 				9BADA01021B61B6700501380 /* UIVIew+.swift in Sources */,
 				9BADA00E21B61B6700501380 /* UIViewController+.swift in Sources */,
+				9BADA0BB21B6537300501380 /* PaddingLabel.swift in Sources */,
 				9BADA00F21B61B6700501380 /* UITableViewCell+.swift in Sources */,
+				9BADA0B621B64F6800501380 /* String+.swift in Sources */,
+				9BADA0BF21B6570A00501380 /* Toast.swift in Sources */,
 				9BADA00D21B61B6700501380 /* UIColor+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -684,6 +720,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = net.mituwa.lib.MEOKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -710,6 +747,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = net.mituwa.lib.MEOKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

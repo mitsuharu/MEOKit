@@ -22,11 +22,11 @@ class ViewController: UIViewController {
         //        let vc = SampleViewController.instantiate(storyboardName: nil, storyboardId: nil)
         //        self.present(vc, animated: true, completion: nil)
         
-
-        
         let v = SampleView.instantiate()
         v.frame = CGRect(x: 50, y: 50, width: 100, height: 100)
         self.view.addSubview(v)
+        
+        Toast.show(text: "祇園精舎の鐘の声、諸行無常の響きあり。沙羅双樹の花の色、盛者必衰の理をあらはす。おごれる人も久しからず。ただ春の夜の夢のごとし。たけき者も遂にはほろびぬ、ひとへに風の前の塵に同じ。 ")
     }
 
 
