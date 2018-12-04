@@ -10,6 +10,7 @@
 		9BAD9FA221B5FC7400501380 /* MEOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BAD9F9821B5FC7400501380 /* MEOKit.framework */; };
 		9BAD9FA721B5FC7400501380 /* MEOKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BAD9FA621B5FC7400501380 /* MEOKitTests.swift */; };
 		9BAD9FA921B5FC7400501380 /* MEOKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BAD9F9B21B5FC7400501380 /* MEOKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9BAD9FF021B6025D00501380 /* NSObject+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BAD9FEF21B6025D00501380 /* NSObject+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +30,7 @@
 		9BAD9FA121B5FC7400501380 /* MEOKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MEOKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BAD9FA621B5FC7400501380 /* MEOKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MEOKitTests.swift; sourceTree = "<group>"; };
 		9BAD9FA821B5FC7400501380 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9BAD9FEF21B6025D00501380 /* NSObject+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +73,7 @@
 		9BAD9F9A21B5FC7400501380 /* MEOKit */ = {
 			isa = PBXGroup;
 			children = (
+				9BAD9FEC21B6020E00501380 /* extensions */,
 				9BAD9F9B21B5FC7400501380 /* MEOKit.h */,
 				9BAD9F9C21B5FC7400501380 /* Info.plist */,
 			);
@@ -84,6 +87,14 @@
 				9BAD9FA821B5FC7400501380 /* Info.plist */,
 			);
 			path = MEOKitTests;
+			sourceTree = "<group>";
+		};
+		9BAD9FEC21B6020E00501380 /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				9BAD9FEF21B6025D00501380 /* NSObject+.swift */,
+			);
+			path = extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,6 +159,7 @@
 				TargetAttributes = {
 					9BAD9F9721B5FC7400501380 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1010;
 					};
 					9BAD9FA021B5FC7400501380 = {
 						CreatedOnToolsVersion = 10.1;
@@ -194,6 +206,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BAD9FF021B6025D00501380 /* NSObject+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,6 +354,7 @@
 		9BAD9FAD21B5FC7400501380 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -357,6 +371,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = net.mituwa.lib.MEOKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -365,6 +380,7 @@
 		9BAD9FAE21B5FC7400501380 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -389,6 +405,7 @@
 		9BAD9FB021B5FC7400501380 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = MEOKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -406,6 +423,7 @@
 		9BAD9FB121B5FC7400501380 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = MEOKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -13,6 +13,23 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        
+        let test:String = String()
+        print(test.className)
+        
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+//        let vc = SampleViewController.instantiate(storyboardName: nil, storyboardId: nil)
+//        self.present(vc, animated: true, completion: nil)
+        
+        let v = SampleView.instantiate()
+        v.frame = CGRect(x: 50, y: 50, width: 100, height: 100)
+        self.view.addSubview(v)
     }
 
 
