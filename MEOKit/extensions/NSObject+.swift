@@ -12,7 +12,7 @@ extension NSObject {
         
     public var className: String {
         get {
-            var name = String(describing: type(of: T.self))
+            var name = String(describing: type(of: self))
             if let range = name.range(of: ".Type") {
                 name.replaceSubrange(range, with: "")
             }

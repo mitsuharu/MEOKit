@@ -11,6 +11,11 @@
 		9BAD9FA721B5FC7400501380 /* MEOKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BAD9FA621B5FC7400501380 /* MEOKitTests.swift */; };
 		9BAD9FA921B5FC7400501380 /* MEOKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BAD9F9B21B5FC7400501380 /* MEOKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9BAD9FF021B6025D00501380 /* NSObject+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BAD9FEF21B6025D00501380 /* NSObject+.swift */; };
+		9BADA00C21B61B6700501380 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BADA00721B61B6700501380 /* UIImage+.swift */; };
+		9BADA00D21B61B6700501380 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BADA00821B61B6700501380 /* UIColor+.swift */; };
+		9BADA00E21B61B6700501380 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BADA00921B61B6700501380 /* UIViewController+.swift */; };
+		9BADA00F21B61B6700501380 /* UITableViewCell+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BADA00A21B61B6700501380 /* UITableViewCell+.swift */; };
+		9BADA01021B61B6700501380 /* UIVIew+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BADA00B21B61B6700501380 /* UIVIew+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +36,11 @@
 		9BAD9FA621B5FC7400501380 /* MEOKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MEOKitTests.swift; sourceTree = "<group>"; };
 		9BAD9FA821B5FC7400501380 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9BAD9FEF21B6025D00501380 /* NSObject+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+.swift"; sourceTree = "<group>"; };
+		9BADA00721B61B6700501380 /* UIImage+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
+		9BADA00821B61B6700501380 /* UIColor+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		9BADA00921B61B6700501380 /* UIViewController+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
+		9BADA00A21B61B6700501380 /* UITableViewCell+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+.swift"; sourceTree = "<group>"; };
+		9BADA00B21B61B6700501380 /* UIVIew+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIVIew+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +103,11 @@
 			isa = PBXGroup;
 			children = (
 				9BAD9FEF21B6025D00501380 /* NSObject+.swift */,
+				9BADA00821B61B6700501380 /* UIColor+.swift */,
+				9BADA00721B61B6700501380 /* UIImage+.swift */,
+				9BADA00A21B61B6700501380 /* UITableViewCell+.swift */,
+				9BADA00B21B61B6700501380 /* UIVIew+.swift */,
+				9BADA00921B61B6700501380 /* UIViewController+.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -207,6 +222,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BAD9FF021B6025D00501380 /* NSObject+.swift in Sources */,
+				9BADA00C21B61B6700501380 /* UIImage+.swift in Sources */,
+				9BADA01021B61B6700501380 /* UIVIew+.swift in Sources */,
+				9BADA00E21B61B6700501380 /* UIViewController+.swift in Sources */,
+				9BADA00F21B61B6700501380 /* UITableViewCell+.swift in Sources */,
+				9BADA00D21B61B6700501380 /* UIColor+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
