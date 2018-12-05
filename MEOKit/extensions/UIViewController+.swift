@@ -39,4 +39,18 @@ extension UIViewController {
         return result
     }
 
+    
+    /// 最も前面にあるViewControllerを取得する
+    static func topLayerViewController() -> UIViewController?{
+        guard let window = UIApplication.shared.keyWindow else {
+            return nil
+        }
+        guard var vc = window.rootViewController else {
+            return nil
+        }
+        while let tmp = vc.presentedViewController {
+            vc = tmp
+        }
+        return vc
+    }
 }

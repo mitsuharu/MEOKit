@@ -20,12 +20,17 @@ extension String {
         return crypt
     }
     
+    /// ローカライズファイルを読み込む
+    public var localized: String {
+        return NSLocalizedString(self, comment: self)
+    }
+    
 }
 
 
 extension String {
     
-    // 改行ごとに分割する
+    /// 改行ごとに分割する
     public func parsedByLines() -> [String] {
         var lines: [String] = [String]()
         self.enumerateLines { (line, stop) in
@@ -40,7 +45,7 @@ extension String {
         return lines
     }
     
-    // 横幅を指定して文字を描画したときの高さを計算する
+    /// 横幅を指定して文字を描画したときの高さを計算する
     public func drawnHeight(width:CGFloat, font:UIFont) -> CGFloat {
         
         let size: CGSize = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)
