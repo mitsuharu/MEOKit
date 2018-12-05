@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CommonCrypto
 
 extension String {
 
