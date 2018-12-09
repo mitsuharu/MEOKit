@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// データをキャッシュする
 public class CachedData: NSObject {
 
     private static var shared: CachedData = CachedData()
