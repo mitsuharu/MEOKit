@@ -8,11 +8,13 @@
 
 import UIKit
 
+/// キャッシュデータの保存期間
 public enum CachedValidity: Int{
     case oneweek
     case oneday
 }
 
+/// キャッシュデータの保存画像フォーマット
 public enum CachedImageFormat: Int{
     case jpg
     case png
@@ -36,7 +38,7 @@ public class CachedData: NSObject, NSCoding {
             return self.calcExpiredAt()
         }
     }
-    var filePath: String? = nil
+    var filePath: URL? = nil
     
     public override init() {
         super.init()
@@ -47,6 +49,22 @@ public class CachedData: NSObject, NSCoding {
         self.validity = validity
         self.data = data
     }
+    
+    public convenience init(string: String, validity: CachedValidity = .oneweek){
+        self.init()
+        self.validity = validity
+        self.string = string
+    }
+    
+    public convenience init(image: UIImage,
+                            imageFormat: CachedImageFormat = .jpg,
+                            validity: CachedValidity = .oneweek){
+        self.init()
+        self.validity = validity
+        self.image = image
+        self.imageFormat = imageFormat
+    }
+    
     
     public func encode(with aCoder: NSCoder) {
         aCoder.encode(self.data, forKey: "data")
@@ -131,12 +149,12 @@ public class CachedData: NSObject, NSCoding {
 
 public extension CachedData{
     
-    @discardableResult func write(path: String) -> Bool{
+    @discardableResult public func write(path: URL) -> Bool{
         if #available(iOS 12, *){
             if let archive = try? NSKeyedArchiver.archivedData(withRootObject: self,
                                                                requiringSecureCoding: false){
                 do{
-                    try archive.write(to: URL(string: path)!)
+                    try archive.write(to: path)
                     return true
                 }catch {
                     return false
@@ -146,15 +164,15 @@ public extension CachedData{
             }
         }else{
             return NSKeyedArchiver.archiveRootObject(self,
-                                                     toFile: path)
+                                                     toFile: path.absoluteString)
         }
     }
     
-    static func load(path: String) -> CachedData?{
+    static public func load(path: URL) -> CachedData?{
         
         var obj: Any? = nil
         if #available(iOS 12, *){
-            if let nsData = NSData(contentsOfFile: path) {
+            if let nsData = NSData(contentsOf: path) {
                 let data = Data(referencing:nsData)
                 do{
                     obj = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data)
@@ -163,7 +181,7 @@ public extension CachedData{
                 }
             }
         }else{
-            obj = NSKeyedUnarchiver.unarchiveObject(withFile: path)
+            obj = NSKeyedUnarchiver.unarchiveObject(withFile: path.absoluteString)
         }
         
         var cache: CachedData? = nil
@@ -181,9 +199,9 @@ public extension CachedData{
         return cache
     }
     
-    @discardableResult static func delete(path: String) -> Bool{
+    @discardableResult public static func delete(path: URL) -> Bool{
         do {
-            try FileManager.default.removeItem(at: URL(string: path)!)
+            try FileManager.default.removeItem(at: path)
             return true
         } catch {
             return false
