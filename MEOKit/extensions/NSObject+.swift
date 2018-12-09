@@ -21,4 +21,18 @@ extension NSObject {
         }
     }
     
+    /// クラスの変数などを文字列で出力する
+    public var classDescription : String {
+        let mirror = Mirror(reflecting: self)
+        let arr = mirror.children.map { element -> String in
+            let key = element.label ?? "Unknown"
+            let value = element.value
+            return "\(key): \(value)"
+        }
+        var str = "none"
+        if arr.count > 0{
+            str = arr.joined(separator: "\n")
+        }
+        return str
+    }
 }

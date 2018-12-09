@@ -13,7 +13,7 @@ private var switchSelectorKey = "switchSelectorKey"
 
 extension UITableViewCell {
 
-    // MARK: - commons
+    /// 掃除
     public func removeAccessoryView() {
         self.removeSwith()
         
@@ -22,10 +22,10 @@ extension UITableViewCell {
         self.accessoryView = nil
     }
     
-    // MARK: - Switch
-    
+    // ハンドラー
     public typealias SwitchHandler = (_ cell:UITableViewCell, _ sw:UISwitch) -> Void
     
+    /// スイッチを追加する
     public func addSwitch(isOn: Bool, completion:@escaping SwitchHandler) {
         let swtch: UISwitch = UISwitch()
         swtch.isOn = isOn
@@ -37,6 +37,7 @@ extension UITableViewCell {
         self.accessoryView = swtch        
     }
     
+    /// スイッチの削除
     public func removeSwith()  {
         objc_setAssociatedObject(self,
                                  &switchSelectorKey,
@@ -50,8 +51,5 @@ extension UITableViewCell {
             handler(self, sw)
         }
     }
-    
-
-
 }
 

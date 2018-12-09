@@ -37,7 +37,7 @@ extension UIView {
 extension UIView{
     
     /// autolayoutで組んで生成したViewのサイズを取得する
-    public func getAutolayoutedSize(fixedWidth:CGFloat? = nil) -> CGSize{
+    public func autolayoutSize(fixedWidth:CGFloat? = nil) -> CGSize{
         /*
          see:【AutoLayout】systemLayoutSizeFittingSizeでもう悩まない！ - Qiita
          https://qiita.com/netetahito/items/8b363d4c7fe5f1ca5636
@@ -59,4 +59,45 @@ extension UIView{
         return size2
     }
     
+    /// view を addSubview したときにサイズも設定する
+    public func addAndFitSubview(_ view:UIView){
+        self.addSubview(view)
+        
+        view.translatesAutoresizingMaskIntoConstraints = self.translatesAutoresizingMaskIntoConstraints
+        if view.translatesAutoresizingMaskIntoConstraints {
+            view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            view.frame = self.bounds
+        } else {
+            view.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+            view.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+            view.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+            view.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+        }
+    }
+
+    /// 背景に画像を設定する
+    public func setBackgroundImage(image:UIImage){
+        UIGraphicsBeginImageContext(self.frame.size)
+        image.draw(in: self.bounds)
+        let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        guard let img = resizedImage else {
+            return
+        }
+        self.backgroundColor = UIColor(patternImage: img)
+    }
+    
+    /// viewを画像にする
+    public var exportedImage: UIImage?{
+        get{
+            UIGraphicsBeginImageContextWithOptions(self.bounds.size, false, 0.0)
+            guard let context = UIGraphicsGetCurrentContext() else {
+                return nil
+            }
+            self.layer.render(in: context)
+            let image = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            return image
+        }
+    }
 }
