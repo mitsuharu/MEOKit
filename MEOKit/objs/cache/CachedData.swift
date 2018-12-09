@@ -50,13 +50,11 @@ public class CachedData: NSObject {
     
     private func pathForUrl(urlString: String) -> URL{
         let md5 = urlString.md5()
-        let path = URL(string: self.pathCacheDir)!.appendingPathComponent(String(md5.prefix(2)))
-        let path2 = path.appendingPathComponent(md5)
-        return path2
+        let path = URL(string: self.pathCacheDir)!.appendingPathComponent(md5)
+        return path
     }
     
     private func makeTempDirs(){
-        
         var isDir: ObjCBool = ObjCBool(false)
         let exists: Bool = FileManager.default.fileExists(atPath: self.pathCacheDir,
                                                           isDirectory: &isDir)
@@ -66,23 +64,6 @@ public class CachedData: NSObject {
                                                         withIntermediateDirectories: true,
                                                         attributes: nil)
             }catch{
-            }
-        }
-        
-        for i in 0..<16{
-            for j in 0..<16{
-                let subdir = self.pathCacheDir + String(format: "/%x%x", i, j)
-                var isSubdir: ObjCBool = ObjCBool(false)
-                let existsSubdir: Bool = FileManager.default.fileExists(atPath: subdir,
-                                                                        isDirectory: &isSubdir)
-                if existsSubdir == false || isSubdir.boolValue == false{
-                    do{
-                        try FileManager.default.createDirectory(atPath: subdir,
-                                                                withIntermediateDirectories: true,
-                                                                attributes: nil)
-                    }catch{
-                    }
-                }
             }
         }
     }

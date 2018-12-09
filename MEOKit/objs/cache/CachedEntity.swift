@@ -9,13 +9,13 @@
 import UIKit
 
 /// キャッシュデータの保存期間
-public enum CachedValidity: Int{
+public enum CachedValidity: Int, Codable{
     case oneweek
     case oneday
 }
 
 /// キャッシュデータの保存画像フォーマット
-public enum CachedImageFormat: Int{
+public enum CachedImageFormat: Int, Codable{
     case jpg
     case png
 }
@@ -71,17 +71,22 @@ class CachedEntity: NSObject, NSCoding {
         aCoder.encode(self.uuid, forKey: "uuid")
         aCoder.encode(self.createdAt, forKey: "createdAt")
         aCoder.encode(self.updatedAt, forKey: "updatedAt")
-        aCoder.encode(self.validity, forKey: "validity")
-        aCoder.encode(self.imageFormat, forKey: "imageFormat")
+        aCoder.encode(NSNumber(value: self.validity.rawValue), forKey: "validity")
+        aCoder.encode(NSNumber(value: self.imageFormat.rawValue), forKey: "imageFormat")
     }
     
-    public required init?(coder aDecoder: NSCoder) {
+    public required convenience init?(coder aDecoder: NSCoder) {
+        self.init()
         self.data = (aDecoder.decodeObject(forKey: "data") as! Data)
         self.uuid = aDecoder.decodeObject(forKey: "uuid") as! String
         self.createdAt = aDecoder.decodeObject(forKey: "createdAt") as! Date
         self.updatedAt = aDecoder.decodeObject(forKey: "updatedAt") as! Date
-        self.validity = aDecoder.decodeObject(forKey: "validity") as! CachedValidity
-        self.imageFormat = aDecoder.decodeObject(forKey: "imageFormat") as! CachedImageFormat
+        
+        let validityNumber: NSNumber = aDecoder.decodeObject(forKey: "validity") as! NSNumber
+        self.validity = CachedValidity(rawValue: validityNumber.intValue) ?? .oneweek
+        
+        let imageFormatNumber: NSNumber = aDecoder.decodeObject(forKey: "imageFormat") as! NSNumber
+        self.imageFormat = CachedImageFormat(rawValue: imageFormatNumber.intValue) ?? .jpg
     }
     
     // 画像入出力
@@ -150,7 +155,7 @@ class CachedEntity: NSObject, NSCoding {
             if let archive = try? NSKeyedArchiver.archivedData(withRootObject: self,
                                                                requiringSecureCoding: false){
                 do{
-                    try archive.write(to: path)
+                    try archive.write(to: path.addFileScheme())
                     return true
                 }catch {
                     return false
@@ -165,10 +170,9 @@ class CachedEntity: NSObject, NSCoding {
     }
     
     static public func load(path: URL) -> CachedEntity?{
-        
         var obj: Any? = nil
         if #available(iOS 12, *){
-            if let nsData = NSData(contentsOf: path) {
+            if let nsData = NSData(contentsOf: path.addFileScheme()) {
                 let data = Data(referencing:nsData)
                 do{
                     obj = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data)
@@ -185,7 +189,7 @@ class CachedEntity: NSObject, NSCoding {
             cache = (obj as! CachedEntity)
             cache?.filePath = path
             if let expiredAt = cache?.expiredAt{
-                if expiredAt > Date(){
+                if expiredAt < Date(){
                     cache = nil
                     obj = nil
                     CachedEntity.delete(path: path)
@@ -202,5 +206,19 @@ class CachedEntity: NSObject, NSCoding {
         } catch {
             return false
         }
+    }
+}
+
+
+extension URL{
+    
+    func addFileScheme() -> URL{
+        let scheme = "file://"
+        let str = self.absoluteString
+        if str.hasPrefix(scheme){
+            return self
+        }
+        let filePath = "\(scheme)\(str)"
+        return URL(string: filePath)!
     }
 }
