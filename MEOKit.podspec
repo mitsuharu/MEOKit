@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "MEOKit"
-  s.version      = "0.1.0"
+  s.version      = "0.1.1"
   s.summary      = "my libraries"
 
   s.description  = <<-DESC
@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   s.author             = { "Mitsuharu Emoto" => "mthr1982@gmail.com" }
   # s.social_media_url = "https://twitter.com/mitsuharu_e"
 
-  s.platform = :ios, "8.0"
+  s.platform = :ios, "10.0"
 
   s.source       = { :git => "https://github.com/mitsuharu/MEOKit.git", :tag => "#{s.version}" }
   s.source_files  = "MEOKit/**/*.swift"
