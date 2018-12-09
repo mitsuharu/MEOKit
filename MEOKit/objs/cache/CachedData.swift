@@ -86,10 +86,7 @@ public class CachedData: NSObject {
             }
         }
     }
-}
-
-public extension CachedData{
-
+    
     private func cachedEntity(key: String) -> CachedEntity?{
         var data = self.cache.object(forKey: key.md5() as AnyObject)
         if data == nil{
@@ -97,6 +94,15 @@ public extension CachedData{
         }
         return (data as? CachedEntity)
     }
+    
+    private func setCachedEntity(cachedEntity: CachedEntity, key:String){
+        cachedEntity.write(path: self.pathForUrl(urlString: key))
+        self.cache.setObject(cachedEntity, forKey: key.md5() as AnyObject)
+    }
+}
+
+// 公開メソッド
+public extension CachedData{
     
     public static func data(key: String) -> Data?{
         let cachedData = CachedData.shared
@@ -120,11 +126,6 @@ public extension CachedData{
             return nil
         }
         return cachedEntity.image
-    }
-    
-    private func setCachedEntity(cachedEntity: CachedEntity, key:String){
-        cachedEntity.write(path: self.pathForUrl(urlString: key))
-        self.cache.setObject(cachedEntity, forKey: key.md5() as AnyObject)
     }
     
     public static func setData(_ data: Data, key:String, validity:CachedValidity = .oneweek){

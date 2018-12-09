@@ -30,9 +30,9 @@ class ViewController: UIViewController {
         
         let key:String = "jsjgogewoj"
         CachedData.setString("キャッシュデータ", key: key)
-
-        let str = CachedData.string(key: key)
-        print("str \(str)")
+        if let str = CachedData.string(key: key){
+            print("str \(str)")
+        }
     }
 
 
