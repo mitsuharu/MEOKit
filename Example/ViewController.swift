@@ -33,6 +33,8 @@ class ViewController: UIViewController {
         if let str = CachedData.string(key: key){
             print("str \(str)")
         }
+        
+        DLOG("あいうえお")
     }
 
 
