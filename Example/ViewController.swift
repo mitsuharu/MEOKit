@@ -34,6 +34,10 @@ class ViewController: UIViewController {
             print("str \(str)")
         }
         
+        DLOG()
+        dprint()
+        DLOG("aaaa")
+        dprint("aaa")
         DLOG("あいうえお")
     }
 

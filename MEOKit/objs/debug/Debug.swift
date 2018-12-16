@@ -8,12 +8,16 @@
 
 import UIKit
 
-// Target > Build Settings > Preprosessor Macros に DEBUG=1 を追加する
-
-import UIKit
-
-private func dprint<T>(contents: T, function: String = #function, line: Int = #line)
-{
+/// DEBUG用print
+///
+/// DEBUGマクロが未設定の場合は， Target > Build Settings > Preprosessor Macros に DEBUG=1 を追加する
+///
+/// - Parameters:
+///   - string: 標準出力に表示する文字列
+///   - function: 関数名（指定不要）
+///   - line: 行数（指定不要）
+public func dprint(_ string: String = "",
+                   function: String = #function, line: Int = #line){
     if DebugManager.shared.debug == false{
         return
     }
@@ -26,32 +30,32 @@ private func dprint<T>(contents: T, function: String = #function, line: Int = #l
     let date:NSDate = NSDate()
     let dateStr = format.string(from: date as Date)
     
-    var isVoid:Bool = false
-    if let str:String = contents as? String{
-        isVoid = (str.count == 0)
-    }
-    
-    if isVoid {
-        print("\(dateStr) \(function)[\(line)]")
-    }else{
-        print("\(dateStr) \(function)[\(line)] \(contents)")
-    }
+    print("\(dateStr) \(function)[\(line)] \(string)")
 }
 
-public func DLOG(function: String = #function, line: Int = #line){
-    dprint(contents:"", function:function, line:line);
-}
-
-public func DLOG<T>(_ contents: T, function: String = #function, line: Int = #line){
-    dprint(contents:contents, function:function, line:line);
+/// DEBUG用DLOG
+///
+/// DEBUGマクロが未設定の場合は， Target > Build Settings > Preprosessor Macros に DEBUG=1 を追加する
+///
+/// - Parameters:
+///   - string: 標準出力に表示する文字列
+///   - function: 関数名（指定不要）
+///   - line: 行数（指定不要）
+public func DLOG(_ string: String = "",
+                 function: String = #function, line: Int = #line){
+    dprint(string, function:function, line:line);
 }
 
 public class DebugManager: NSObject{
     
     public static var shared:DebugManager = DebugManager()
-    var debug: Bool{
+    private var _debug: Bool = false
+    public var debug: Bool{
+        set(p){
+            self._debug = p
+        }
         get{
-            var temp: Bool = false
+            var temp: Bool = self._debug
             #if DEBUG
             temp = true
             #endif
