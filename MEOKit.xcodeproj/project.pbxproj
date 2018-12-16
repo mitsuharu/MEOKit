@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B6989CC21C66C1000E687AF /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6989CB21C66C1000E687AF /* Debug.swift */; };
 		9BAD9FA221B5FC7400501380 /* MEOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BAD9F9821B5FC7400501380 /* MEOKit.framework */; };
 		9BAD9FA721B5FC7400501380 /* MEOKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BAD9FA621B5FC7400501380 /* MEOKitTests.swift */; };
 		9BAD9FA921B5FC7400501380 /* MEOKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BAD9F9B21B5FC7400501380 /* MEOKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -63,6 +64,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9B6989CB21C66C1000E687AF /* Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
 		9BAD9F9821B5FC7400501380 /* MEOKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MEOKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BAD9F9B21B5FC7400501380 /* MEOKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MEOKit.h; sourceTree = "<group>"; };
 		9BAD9F9C21B5FC7400501380 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -143,6 +145,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9B6989CA21C66BE100E687AF /* debug */ = {
+			isa = PBXGroup;
+			children = (
+				9B6989CB21C66C1000E687AF /* Debug.swift */,
+			);
+			path = debug;
+			sourceTree = "<group>";
+		};
 		9BAD9F8E21B5FC7400501380 = {
 			isa = PBXGroup;
 			children = (
@@ -217,6 +227,7 @@
 		9BADA0BC21B656DF00501380 /* objs */ = {
 			isa = PBXGroup;
 			children = (
+				9B6989CA21C66BE100E687AF /* debug */,
 				9BBF5EFE21BBFAE5008360B5 /* cache */,
 				9BADA0BD21B656FA00501380 /* toast */,
 			);
@@ -502,6 +513,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BBF5F0021BBFB47008360B5 /* CachedEntity.swift in Sources */,
+				9B6989CC21C66C1000E687AF /* Debug.swift in Sources */,
 				9BAD9FF021B6025D00501380 /* NSObject+.swift in Sources */,
 				9BADA00C21B61B6700501380 /* UIImage+.swift in Sources */,
 				9BADA01021B61B6700501380 /* UIVIew+.swift in Sources */,

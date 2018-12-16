@@ -32,4 +32,6 @@ extension NSObject : MyExtensionProtocol{}
 
 // hogehoge.meo.foo() で追加できる
 public extension MyExtension where T: NSObject {
+//    func foo() {
+//    }
 }
