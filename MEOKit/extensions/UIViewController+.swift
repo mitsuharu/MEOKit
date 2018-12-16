@@ -39,7 +39,6 @@ extension UIViewController {
         return result
     }
 
-    
     /// 最も前面にあるViewControllerを取得する
     static func topLayerViewController() -> UIViewController?{
         guard let window = UIApplication.shared.keyWindow else {
