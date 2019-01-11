@@ -8,8 +8,83 @@
 
 import UIKit
 
-extension UIView {
+// hack的なやつは別で分ける
+public extension MeoExtension where T: UIView {
     
+    /// 自身をaddしたUIViewControllerを取得する
+    public var viewController: UIViewController?{
+        return self.base.parent(type: UIViewController.self)
+    }
+    
+    /// autolayoutで組んで生成したViewのサイズを取得する
+    public func autolayoutSize(fixedWidth:CGFloat? = nil) -> CGSize{
+        /*
+         see:【AutoLayout】systemLayoutSizeFittingSizeでもう悩まない！ - Qiita
+         https://qiita.com/netetahito/items/8b363d4c7fe5f1ca5636
+         */
+        
+        let view: UIView = self.base
+        var size:CGSize = CGSize.zero
+        if let w = fixedWidth{
+            size = view.systemLayoutSizeFitting(CGSize(width: w, height: 0),
+                                                withHorizontalFittingPriority: UILayoutPriority.required, verticalFittingPriority: UILayoutPriority.fittingSizeLevel)
+        }else{
+            size = view.systemLayoutSizeFitting(UIView.layoutFittingExpandedSize)
+        }
+        
+        let w = CGFloat(ceilf(Float(size.width)))
+        let h = CGFloat(ceilf(Float(size.height)))
+        let size2:CGSize = CGSize(width: w, height: h)
+        
+        return size2
+    }
+    
+    /// view を addSubview したときにサイズも設定する
+    public func addAndFitSubview(_ view:UIView){
+        self.base.addSubview(view)
+        
+        view.translatesAutoresizingMaskIntoConstraints = self.base.translatesAutoresizingMaskIntoConstraints
+        if view.translatesAutoresizingMaskIntoConstraints {
+            view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            view.frame = self.base.bounds
+        } else {
+            view.topAnchor.constraint(equalTo: self.base.topAnchor).isActive = true
+            view.bottomAnchor.constraint(equalTo: self.base.bottomAnchor).isActive = true
+            view.leftAnchor.constraint(equalTo: self.base.leftAnchor).isActive = true
+            view.rightAnchor.constraint(equalTo: self.base.rightAnchor).isActive = true
+        }
+    }
+    
+    /// 背景に画像を設定する
+    public func setBackgroundImage(image:UIImage){
+        UIGraphicsBeginImageContext(self.base.frame.size)
+        image.draw(in: self.base.bounds)
+        let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        guard let img = resizedImage else {
+            return
+        }
+        self.base.backgroundColor = UIColor(patternImage: img)
+    }
+    
+    /// viewを画像にする
+    public var exportedImage: UIImage?{
+        get{
+            UIGraphicsBeginImageContextWithOptions(self.base.bounds.size, false, 0.0)
+            guard let context = UIGraphicsGetCurrentContext() else {
+                return nil
+            }
+            self.base.layer.render(in: context)
+            let image = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            return image
+        }
+    }
+    
+}
+
+extension UIView {
+        
     /// nibファイルから生成する
     public static func instantiate(nibName:String? = nil) -> Self{
         return instantiateHelper(nibName: nibName)
@@ -33,71 +108,3 @@ extension UIView {
     }
 }
 
-
-extension UIView{
-    
-    /// autolayoutで組んで生成したViewのサイズを取得する
-    public func autolayoutSize(fixedWidth:CGFloat? = nil) -> CGSize{
-        /*
-         see:【AutoLayout】systemLayoutSizeFittingSizeでもう悩まない！ - Qiita
-         https://qiita.com/netetahito/items/8b363d4c7fe5f1ca5636
-         */
-        
-        var size:CGSize = CGSize.zero
-        
-        if let w = fixedWidth{
-            size = self.systemLayoutSizeFitting(CGSize(width: w, height: 0),
-                                                withHorizontalFittingPriority: UILayoutPriority.required, verticalFittingPriority: UILayoutPriority.fittingSizeLevel)
-        }else{
-            size = self.systemLayoutSizeFitting(UIView.layoutFittingExpandedSize)
-        }
-        
-        let w = CGFloat(ceilf(Float(size.width)))
-        let h = CGFloat(ceilf(Float(size.height)))
-        let size2:CGSize = CGSize(width: w, height: h)
-        
-        return size2
-    }
-    
-    /// view を addSubview したときにサイズも設定する
-    public func addAndFitSubview(_ view:UIView){
-        self.addSubview(view)
-        
-        view.translatesAutoresizingMaskIntoConstraints = self.translatesAutoresizingMaskIntoConstraints
-        if view.translatesAutoresizingMaskIntoConstraints {
-            view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            view.frame = self.bounds
-        } else {
-            view.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-            view.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-            view.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-            view.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
-        }
-    }
-
-    /// 背景に画像を設定する
-    public func setBackgroundImage(image:UIImage){
-        UIGraphicsBeginImageContext(self.frame.size)
-        image.draw(in: self.bounds)
-        let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        guard let img = resizedImage else {
-            return
-        }
-        self.backgroundColor = UIColor(patternImage: img)
-    }
-    
-    /// viewを画像にする
-    public var exportedImage: UIImage?{
-        get{
-            UIGraphicsBeginImageContextWithOptions(self.bounds.size, false, 0.0)
-            guard let context = UIGraphicsGetCurrentContext() else {
-                return nil
-            }
-            self.layer.render(in: context)
-            let image = UIGraphicsGetImageFromCurrentImageContext()
-            UIGraphicsEndImageContext()
-            return image
-        }
-    }
-}

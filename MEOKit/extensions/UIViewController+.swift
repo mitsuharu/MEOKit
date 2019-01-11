@@ -8,6 +8,9 @@
 
 import UIKit
 
+public extension MeoExtension where T: UIViewController {
+}
+
 extension UIViewController {
     
     /// storyboardから生成する

@@ -18,8 +18,13 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        print("className \(self.className)")
-        print("classDescription \(self.classDescription)")
+        let aaa: String = "aaa".meo.md5
+        print("tste \(aaa)")
+        
+        
+        
+        print("className \(self.meo.className)")
+        print("classDescription \(self.meo.classDescription)")
 
         let v = SampleView.instantiate()
         v.frame = CGRect(x: 50, y: 50, width: 100, height: 100)
