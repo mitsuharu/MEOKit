@@ -49,7 +49,7 @@ public class CachedData: NSObject {
     }
     
     private func pathForUrl(urlString: String) -> URL{
-        let md5 = urlString.md5()
+        let md5 = urlString.meo.md5
         let path = URL(string: self.pathCacheDir)!.appendingPathComponent(md5)
         return path
     }
@@ -69,7 +69,7 @@ public class CachedData: NSObject {
     }
     
     private func cachedEntity(key: String) -> CachedEntity?{
-        var data = self.cache.object(forKey: key.md5() as AnyObject)
+        var data = self.cache.object(forKey: key.meo.md5 as AnyObject)
         if data == nil{
             data = CachedEntity.load(path: self.pathForUrl(urlString: key))
         }
@@ -78,7 +78,7 @@ public class CachedData: NSObject {
     
     private func setCachedEntity(cachedEntity: CachedEntity, key:String){
         cachedEntity.write(path: self.pathForUrl(urlString: key))
-        self.cache.setObject(cachedEntity, forKey: key.md5() as AnyObject)
+        self.cache.setObject(cachedEntity, forKey: key.meo.md5 as AnyObject)
     }
 }
 
@@ -101,6 +101,10 @@ public extension CachedData{
         return cachedEntity.string
     }
     
+    public static func image(url: URL) -> UIImage?{
+        return CachedData.image(key: url.absoluteString)
+    }
+    
     public static func image(key: String) -> UIImage?{
         let cachedData = CachedData.shared
         guard let cachedEntity = cachedData.cachedEntity(key: key) else {
@@ -121,6 +125,10 @@ public extension CachedData{
         cachedData.setCachedEntity(cachedEntity: cachedEntity, key: key)
     }
     
+    public static func setImage(_ image: UIImage, url:URL, validity:CachedValidity = .oneweek) {
+        CachedData.setImage(image, key: url.absoluteString, validity:validity)
+    }
+    
     public static func setImage(_ image: UIImage, key:String, validity:CachedValidity = .oneweek) {
         var imageFormat:CachedImageFormat = .jpg
         if key.hasSuffix(".jpg") || key.hasSuffix(".jpeg"){
@@ -137,7 +145,7 @@ public extension CachedData{
     
     public static func delete(key: String){
         let cachedData = CachedData.shared
-        cachedData.cache.removeObject(forKey: key.md5() as AnyObject)
+        cachedData.cache.removeObject(forKey: key.meo.md5 as AnyObject)
         CachedEntity.delete(path: cachedData.pathForUrl(urlString: key))
     }
     

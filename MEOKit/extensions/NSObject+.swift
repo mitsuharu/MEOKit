@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import ObjectiveC
 
-extension NSObject {
+public extension MeoExtension where T: NSObject {
     
     /// クラス名を取得する
     public var className: String {
         get {
-            var name = String(describing: type(of: self))
+            var name = String(describing: type(of: self.base))
             if let range = name.range(of: ".Type") {
                 name.replaceSubrange(range, with: "")
             }
@@ -23,7 +24,7 @@ extension NSObject {
     
     /// クラスの変数などを文字列で出力する
     public var classDescription : String {
-        let mirror = Mirror(reflecting: self)
+        let mirror = Mirror(reflecting: self.base)
         let arr = mirror.children.map { element -> String in
             let key = element.label ?? "Unknown"
             let value = element.value
@@ -36,3 +37,4 @@ extension NSObject {
         return str
     }
 }
+

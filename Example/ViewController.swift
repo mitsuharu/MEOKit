@@ -18,8 +18,22 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        print("className \(self.className)")
-        print("classDescription \(self.classDescription)")
+        let aaa: String = "aaa".meo.md5
+        print("tste \(aaa)")
+        
+        let key2 = "test"
+        self.meo.associate(obj: "agavearge", forKey: key2)
+        if let str = self.meo.associated(key: key2, type: String.self){
+            print("str2 \(str)")
+        }else{
+            print("str2 nillll")
+        }
+        
+        
+        
+        
+        print("className \(self.meo.className)")
+        print("classDescription \(self.meo.classDescription)")
 
         let v = SampleView.instantiate()
         v.frame = CGRect(x: 50, y: 50, width: 100, height: 100)

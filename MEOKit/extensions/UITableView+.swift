@@ -8,11 +8,15 @@
 
 import UIKit
 
-extension UITableView{
+public extension MeoExtension where T: UITableView {
     
     /// cellを登録する（クラス名とnibファイル名は同一と想定する）
     public func registerCell(className: String) {
         let nib = UINib(nibName: className, bundle: Bundle.main)
-        self.register(nib, forCellReuseIdentifier: className)
+        self.base.register(nib, forCellReuseIdentifier: className)
     }
+    
+}
+
+extension UITableView{
 }
