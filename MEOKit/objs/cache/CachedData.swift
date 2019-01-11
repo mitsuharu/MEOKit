@@ -101,6 +101,10 @@ public extension CachedData{
         return cachedEntity.string
     }
     
+    public static func image(url: URL) -> UIImage?{
+        return CachedData.image(key: url.absoluteString)
+    }
+    
     public static func image(key: String) -> UIImage?{
         let cachedData = CachedData.shared
         guard let cachedEntity = cachedData.cachedEntity(key: key) else {
@@ -119,6 +123,10 @@ public extension CachedData{
         let cachedData = CachedData.shared
         let cachedEntity:CachedEntity = CachedEntity(string: string, validity: validity)
         cachedData.setCachedEntity(cachedEntity: cachedEntity, key: key)
+    }
+    
+    public static func setImage(_ image: UIImage, url:URL, validity:CachedValidity = .oneweek) {
+        CachedData.setImage(image, key: url.absoluteString, validity:validity)
     }
     
     public static func setImage(_ image: UIImage, key:String, validity:CachedValidity = .oneweek) {

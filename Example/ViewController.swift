@@ -21,6 +21,15 @@ class ViewController: UIViewController {
         let aaa: String = "aaa".meo.md5
         print("tste \(aaa)")
         
+        let key2 = "test"
+        self.meo.associate(obj: "agavearge", forKey: key2)
+        if let str = self.meo.associated(key: key2, type: String.self){
+            print("str2 \(str)")
+        }else{
+            print("str2 nillll")
+        }
+        
+        
         
         
         print("className \(self.meo.className)")
