@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import ObjectiveC
 
 public extension MeoExtension where T: NSObject {
     

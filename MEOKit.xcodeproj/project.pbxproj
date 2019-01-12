@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9B07AE2B21E8E01700BB4B70 /* UIResponder+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B07AE2A21E8E01700BB4B70 /* UIResponder+.swift */; };
-		9B07AE2D21E9163600BB4B70 /* NSObject+AssociatedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B07AE2C21E9163600BB4B70 /* NSObject+AssociatedObject.swift */; };
+		9B07AE2D21E9163600BB4B70 /* NSObject+ObjC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B07AE2C21E9163600BB4B70 /* NSObject+ObjC.swift */; };
 		9B6989CC21C66C1000E687AF /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6989CB21C66C1000E687AF /* Debug.swift */; };
 		9BAD9FA221B5FC7400501380 /* MEOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BAD9F9821B5FC7400501380 /* MEOKit.framework */; };
 		9BAD9FA721B5FC7400501380 /* MEOKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BAD9FA621B5FC7400501380 /* MEOKitTests.swift */; };
@@ -67,7 +67,7 @@
 
 /* Begin PBXFileReference section */
 		9B07AE2A21E8E01700BB4B70 /* UIResponder+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+.swift"; sourceTree = "<group>"; };
-		9B07AE2C21E9163600BB4B70 /* NSObject+AssociatedObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+AssociatedObject.swift"; sourceTree = "<group>"; };
+		9B07AE2C21E9163600BB4B70 /* NSObject+ObjC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+ObjC.swift"; sourceTree = "<group>"; };
 		9B6989CB21C66C1000E687AF /* Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
 		9BAD9F9821B5FC7400501380 /* MEOKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MEOKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BAD9F9B21B5FC7400501380 /* MEOKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MEOKit.h; sourceTree = "<group>"; };
@@ -209,7 +209,7 @@
 				9BE1950021B80A1C003F9FCF /* Collection+.swift */,
 				9BE194FC21B7F09B003F9FCF /* Extension.swift */,
 				9BAD9FEF21B6025D00501380 /* NSObject+.swift */,
-				9B07AE2C21E9163600BB4B70 /* NSObject+AssociatedObject.swift */,
+				9B07AE2C21E9163600BB4B70 /* NSObject+ObjC.swift */,
 				9BADA0B521B64F6800501380 /* String+.swift */,
 				9BADA00821B61B6700501380 /* UIColor+.swift */,
 				9BADA00721B61B6700501380 /* UIImage+.swift */,
@@ -530,7 +530,7 @@
 				9BE194FD21B7F09B003F9FCF /* Extension.swift in Sources */,
 				9BADA0B621B64F6800501380 /* String+.swift in Sources */,
 				9BE194BE21B6AA9D003F9FCF /* PaddingLabel.swift in Sources */,
-				9B07AE2D21E9163600BB4B70 /* NSObject+AssociatedObject.swift in Sources */,
+				9B07AE2D21E9163600BB4B70 /* NSObject+ObjC.swift in Sources */,
 				9BADA0BF21B6570A00501380 /* Toast.swift in Sources */,
 				9BADA00D21B61B6700501380 /* UIColor+.swift in Sources */,
 				9BE1950121B80A1C003F9FCF /* Collection+.swift in Sources */,

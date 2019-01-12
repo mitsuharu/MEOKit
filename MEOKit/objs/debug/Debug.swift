@@ -58,23 +58,54 @@ public func DLOG(_ string: String? = nil,
 }
 
 public class DebugManager: NSObject{
+    
     public static var shared:DebugManager = DebugManager()
-    public var isDebug: Bool = false
+    private var isSwizzled: Bool = false
+    public var isDebug: Bool = false{
+        didSet{
+            self.setupDebugs()
+        }
+    }
+    
+    func setupDebugs(){
+        if self.isDebug {
+            if self.isSwizzled == false{
+                self.isSwizzled = true
+                self.meo.swizzle(from: #selector(getter: UIView.accessibilityIdentifier),
+                                 to: #selector(getter: UIView.swizzledAccessibilityIdentifier),
+                                 anyClass: UIView.self)
+            }
+        }
+    }
 }
 
 
-//extension UIView{
-//    //  accessibilityIdentifier
-//    
-//    public var accessibilityIdentifier: String? {
-//        
-//        if DebugManager.shared.isDebug == false{
-//            return super.accessibilityIdentifier
-//        }
-//        
-//        return nil
-//        
-//    }
-//
-//}
+extension UIView{
+
+    /// デバック中は accessibilityIdentifier に適切な文字を入れる
+    @objc dynamic fileprivate var swizzledAccessibilityIdentifier: String? {
+        
+        if DebugManager.shared.isDebug == true{
+            if let p = self.parent(type: UIViewController.self){
+                let mirror = Mirror(reflecting: p)
+                for element in mirror.children{
+                    if let temp = element.value as? UIView{
+                        let key:String = element.label ?? "unknown"
+                        if temp.description == self.description{
+                            var infos: [String] = [String]()
+                            infos.append("frame=\(NSCoder.string(for: temp.frame))")
+                            infos.append("tag=\(temp.tag)")
+                            let str = key + "(" + infos.joined(separator: ", ") + ")"
+                            return str
+                        }
+                    }
+                }
+            }
+            return self.description
+        }else{
+            return self.swizzledAccessibilityIdentifier
+        }
+    }
+
+}
 

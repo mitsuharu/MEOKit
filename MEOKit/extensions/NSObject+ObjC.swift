@@ -1,5 +1,5 @@
 //
-//  NSObject+AssociatedObject.swift
+//  NSObject+ObjC.swift
 //  MEOKit
 //
 //  Created by Mitsuhau Emoto on 2019/01/12.
@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ObjectiveC
 
 // 連想オブジェのキー
 fileprivate var AssociatedKey = 0
@@ -85,4 +86,50 @@ public extension MeoExtension where T: NSObject {
         self.associate(obj: nil, forKey: key)
     }
     
+}
+
+public extension MeoExtension where T: NSObject {
+    
+    /// メソッドの入れ替え（メソッド名に from/to を用いているが入れ替え，両方向に影響する）
+    ///
+    /// 実行例
+    /// ```
+    /// self.meo.swizzle(from: #selector(test01), to: #selector(test02))
+    /// ```
+    ///
+    /// 入れ替えるメソッドには ```@objc dynamic``` を付ける
+    /// ```
+    /// @objc dynamic func test01() {
+    ///     print("test01")
+    /// }
+    /// ```
+    ///
+    /// 既存メソッドを入れ替える場合は一般に関数で自身を呼ぶ．ループのように見えるが，このときメソッド中の関数は入れ替えた関数になる．つまり既存メソッドを実行してから機能追加を行うことができる．
+    /// ```
+    /// @objc dynamic func viewDidAppear2(_ animated: Bool) {
+    ///     viewDidAppear2(animated)
+    ///     print("viewDidAppear2")
+    /// }
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - fromMethod: 入れ替えるメソッドのセレクター ```#selector(viewDidAppear(_:))```
+    ///   - toMethod: 入れ替えるメソッドのセレクター ```#selector(viewDidAppear2(_:))```
+    ///   - anyClass: そのメソッドを持つクラス（デフォルトnilで自動設定する）．```self.classForCoder``` や ```UIView.self ``` など
+    ///
+    public func swizzle(from fromMethod: Selector,
+                        to toMethod: Selector,
+                        anyClass: AnyClass? = nil){
+        var cls:AnyClass = self.base.classForCoder
+        if let temp = anyClass{
+            cls = temp
+        }
+        guard
+            let to: Method = class_getInstanceMethod(cls, toMethod),
+            let from: Method = class_getInstanceMethod(cls, fromMethod)
+        else {
+            return
+        }
+        method_exchangeImplementations(from, to)
+    }
 }
