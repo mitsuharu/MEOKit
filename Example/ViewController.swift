@@ -14,7 +14,7 @@ enum CellSource: String, CaseIterable{
     case associate = "Associate (see console)"
     case cache = "Cache (see console)"
     case swizzle = "Swizzle (see console)"
-    case switchOnCell = "switch on cell"
+    case switchOnCell = "switch on cell (see console)"
     case views = "views (pushed)"
 }
 
