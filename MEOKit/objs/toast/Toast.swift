@@ -28,7 +28,7 @@ public class Toast: NSObject {
     
     private func show(text:String){
 
-        if let _ = self.label{
+        if let label = self.label, let _ = label.superview{
             self.remove(isAnimated: false) {
                 self.show(text: text)
             }
@@ -70,7 +70,7 @@ public class Toast: NSObject {
     
     private func remove(isAnimated:Bool = true, completion:(()->())? = nil) {
         
-        guard let label = self.label else {
+        guard let label = self.label, let _ = label.superview else {
             return
         }
         
@@ -84,7 +84,6 @@ public class Toast: NSObject {
                         label.alpha = 0.0
         }) { (completed) in
             label.removeFromSuperview()
-            self.label = nil
             if let cmp = completion{
                 cmp()
             }
