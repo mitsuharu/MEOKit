@@ -12,23 +12,24 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SampleView" customModule="Demo" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="abs-tO-Wg4" customClass="SampleView" customModule="Example" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SampleView" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oQP-ph-Wvv">
-                    <rect key="frame" x="140.5" y="323" width="94" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="sample view" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WkP-It-TE9">
+                    <rect key="frame" x="126.5" y="320" width="122.5" height="27.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="oQP-ph-Wvv" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="GH4-a6-QUt"/>
-                <constraint firstItem="oQP-ph-Wvv" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="ZdX-EH-0AK"/>
+                <constraint firstItem="WkP-It-TE9" firstAttribute="centerX" secondItem="abs-tO-Wg4" secondAttribute="centerX" id="R8y-lg-p4y"/>
+                <constraint firstItem="WkP-It-TE9" firstAttribute="centerY" secondItem="abs-tO-Wg4" secondAttribute="centerY" id="onh-Os-AHj"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <viewLayoutGuide key="safeArea" id="oTu-PQ-YQo"/>
+            <point key="canvasLocation" x="170" y="-222"/>
         </view>
     </objects>
 </document>

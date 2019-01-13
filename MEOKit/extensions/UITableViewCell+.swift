@@ -17,11 +17,32 @@ public extension MeoExtension where T: UITableViewCell {
     }
     
     /// 自身のIndexPathを取得する
-    var indexPath: IndexPath? {
+    public var indexPath: IndexPath? {
         guard let tv: UITableView = self.tableView else {
             return nil
         }
         return tv.indexPath(for: self.base)
+    }
+    
+    /// 自身を reloadRows() する
+    ///
+    /// - Parameter animation: アニメーション（デフォルトは.none）
+    /// - Returns: 成功したらtrue（例外はキャッチできない）．
+    @discardableResult
+    public func reload(animation: UITableView.RowAnimation = .none) -> Bool{
+        guard
+            let tableView: UITableView = self.tableView,
+            let ip = tableView.indexPath(for: self.base) else {
+            return false
+        }
+        var result: Bool = false
+        if let ips = tableView.indexPathsForVisibleRows, ips.contains(ip){
+            DispatchQueue.main.async {
+                tableView.reloadRows(at: [ip], with: animation)
+            }
+            result = true
+        }
+        return result
     }
     
 }
@@ -48,10 +69,9 @@ public extension MeoExtension where T: UITableViewCell {
         swtch.addTarget(self.base,
                         action: #selector(self.base.doSwitch(sw:)),
                         for: UIControl.Event.valueChanged)
-        objc_setAssociatedObject(self.base,
-                                 &switchSelectorKey,
-                                 completion,
-                                 objc_AssociationPolicy.OBJC_ASSOCIATION_COPY_NONATOMIC)
+        let policy = objc_AssociationPolicy.OBJC_ASSOCIATION_COPY_NONATOMIC
+        objc_setAssociatedObject(self.base, &switchSelectorKey,
+                                 completion, policy)
         self.base.accessoryView = swtch
     }
     
@@ -63,8 +83,6 @@ public extension MeoExtension where T: UITableViewCell {
                                  objc_AssociationPolicy.OBJC_ASSOCIATION_COPY_NONATOMIC)
         self.base.accessoryView = nil
     }
-    
-    
 }
 
 
