@@ -78,9 +78,6 @@ extension ViewController{
     }
     
     func sampleSwizzle(){
-        
-        print("[sampleSwizzle]")
-        
         let key = "swizzled"
         var title: String{
             get{
