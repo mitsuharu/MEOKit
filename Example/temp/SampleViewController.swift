@@ -10,21 +10,31 @@ import UIKit
 
 class SampleViewController: UIViewController {
 
+    var sampleView: SampleView? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.addSampleView()
     }
-    */
-
+    
+    func addSampleView() {
+        if let v = self.sampleView{
+            v.removeFromSuperview()
+        }
+        self.sampleView = {
+            let v = SampleView.instantiate()
+            v.frame = CGRect(x: 10, y: 100, width: 200, height: 100)
+            return v
+        }()
+        if let v = self.sampleView{
+            self.view.addSubview(v)
+            if let str = v.accessibilityIdentifier{
+                print("sampleView.accessibilityIdentifier (isDeug) = \(str)")
+            }
+        }
+    }
 }

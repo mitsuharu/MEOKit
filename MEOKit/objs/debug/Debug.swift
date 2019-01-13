@@ -12,13 +12,18 @@ import UIKit
 ///
 /// DEBUGマクロが未設定の場合は， Target > Build Settings > Preprosessor Macros に DEBUG=1 を追加する
 ///
+/// #if DEBUG
+/// DebugManager.shared.isDebug = true
+/// #endif
+///
 /// - Parameters:
 ///   - string: 標準出力に表示する文字列
 ///   - function: 関数名（指定不要）
 ///   - line: 行数（指定不要）
-public func dprint(_ string: String = "",
+///
+public func dprint(_ string: String? = nil,
                    function: String = #function, line: Int = #line){
-    if DebugManager.shared.debug == false{
+    if DebugManager.shared.isDebug == false{
         return
     }
     
@@ -30,7 +35,11 @@ public func dprint(_ string: String = "",
     let date:NSDate = NSDate()
     let dateStr = format.string(from: date as Date)
     
-    print("\(dateStr) \(function)[\(line)] \(string)")
+    var str = ""
+    if let s = string{
+        str = s
+    }
+    print("\(dateStr) \(function)[\(line)] \(str)")
 }
 
 /// DEBUG用DLOG
@@ -41,27 +50,58 @@ public func dprint(_ string: String = "",
 ///   - string: 標準出力に表示する文字列
 ///   - function: 関数名（指定不要）
 ///   - line: 行数（指定不要）
-public func DLOG(_ string: String = "",
+public func DLOG(_ string: String? = nil,
                  function: String = #function, line: Int = #line){
     dprint(string, function:function, line:line);
 }
 
+
+/// デバッグに便利系なのをまとめた
 public class DebugManager: NSObject{
     
     public static var shared:DebugManager = DebugManager()
-    private var _debug: Bool = false
-    public var debug: Bool{
-        set(p){
-            self._debug = p
+    public var isDebug: Bool = false{
+        didSet{
+            self.setupDebugs()
         }
-        get{
-            var temp: Bool = self._debug
-            #if DEBUG
-            temp = true
-            #endif
-            return temp
+    }
+    
+    func setupDebugs(){
+        if self.isDebug {
+            self.meo.once(key: "swizzled") {
+                self.meo.swizzle(from: #selector(getter: UIView.accessibilityIdentifier),
+                                 to: #selector(getter: UIView.swizzledAccessibilityIdentifier),
+                                 anyClass: UIView.self)
+            }
         }
     }
 }
 
+extension UIView{
+
+    /// デバック中は accessibilityIdentifier に適切な文字を入れる
+    @objc dynamic fileprivate var swizzledAccessibilityIdentifier: String? {
+        if DebugManager.shared.isDebug == true{
+            if let p = self.parent(type: UIViewController.self){
+                let mirror = Mirror(reflecting: p)
+                for element in mirror.children{
+                    if let temp = element.value as? UIView{
+                        if temp.description == self.description{
+                            let key:String = element.label ?? "unknown"
+                            var infos: [String] = [String]()
+                            infos.append("frame=\(NSCoder.string(for: temp.frame))")
+                            infos.append("tag=\(temp.tag)")
+                            let str = key + "(" + infos.joined(separator: ", ") + ")"
+                            return str
+                        }
+                    }
+                }
+            }
+            return self.description
+        }else{
+            return self.swizzledAccessibilityIdentifier
+        }
+    }
+
+}
 

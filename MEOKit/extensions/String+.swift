@@ -9,34 +9,30 @@
 import UIKit
 import CommonCrypto
 
-extension String {
-
+// Stringの自作extension
+public extension MeoExtension where T == String {
+    
     /// MD5で暗号化する
-    public func md5() -> String {
-        let data = self.data(using: .utf8)!
+    public var md5: String {
+        let data = self.base.data(using: .utf8)!
         var digest = [UInt8](repeating: 0, count: Int(CC_MD5_DIGEST_LENGTH))
-        _ = data.withUnsafeBytes { CC_MD5($0, CC_LONG(data.count), &digest) }
-        let crypt = digest.map { String(format: "%02x", $0) }.joined(separator: "")
+        _ = data.withUnsafeBytes{CC_MD5($0, CC_LONG(data.count), &digest)}
+        let crypt = digest.map{String(format: "%02x", $0)}.joined(separator: "")
         return crypt
     }
     
     /// ローカライズファイルを読み込む
     public var localized: String {
-        return NSLocalizedString(self, comment: self)
+        return NSLocalizedString(self.base, comment: self.base)
     }
-    
-}
-
-
-extension String {
     
     /// 改行ごとに分割する
     public func parsedByLines() -> [String] {
         var lines: [String] = [String]()
-        self.enumerateLines { (line, stop) in
+        self.base.enumerateLines { (line, stop) in
             lines.append(line)
         }
-        let temp = self.components(separatedBy: CharacterSet.newlines)
+        let temp = self.base.components(separatedBy: CharacterSet.newlines)
         if let last = temp.last{
             if temp.count > 1 && last == ""{
                 lines.append(last)

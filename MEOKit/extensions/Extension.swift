@@ -8,30 +8,35 @@
 
 import UIKit
 
-public class MyExtension<T> {
+/*
+ 原則，インスタントメソッドの extension は
+ hogehoge.meo.foo() のように meo を差し込んで，メソッドの衝突を防ぐ
+ */
+
+public class MeoExtension<T> {
     let base: T
     init (_ base: T) {
         self.base = base
     }
 }
 
-public protocol MyExtensionProtocol {
+public protocol MeoExtensionProtocol {
     associatedtype T
-    var meo: MyExtension<T> { get }
+    var meo: MeoExtension<T> { get }
 }
 
-public extension MyExtensionProtocol {
-    public var meo: MyExtension<Self> {
-        return MyExtension(self)
+public extension MeoExtensionProtocol {
+    public var meo: MeoExtension<Self> {
+        return MeoExtension(self)
     }
 }
 
-// すべてに meo を作成する
-// プロトコル型とクラス型以外のものを指定するとエラーになる（Stringなど）
-extension NSObject : MyExtensionProtocol{}
+// meo を作成する
+extension NSObject : MeoExtensionProtocol{}
+extension String : MeoExtensionProtocol{}
 
-// hogehoge.meo.foo() で追加できる
-public extension MyExtension where T: NSObject {
-//    func foo() {
-//    }
-}
+//// hogehoge.meo.foo() で追加できる
+//public extension MeoExtension where T: NSObject {
+////    func foo() {
+////    }
+//}
