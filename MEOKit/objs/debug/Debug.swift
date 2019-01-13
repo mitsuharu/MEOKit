@@ -35,7 +35,7 @@ public func dprint(_ string: String? = nil,
     let date:NSDate = NSDate()
     let dateStr = format.string(from: date as Date)
     
-    var str = "nil"
+    var str = ""
     if let s = string{
         str = s
     }
@@ -66,13 +66,9 @@ public class DebugManager: NSObject{
         }
     }
     
-    // swizzle処理の重複を防ぐ
-    private var isSwizzled: Bool = false
-    
     func setupDebugs(){
         if self.isDebug {
-            if self.isSwizzled == false{
-                self.isSwizzled = true
+            self.meo.once(key: "swizzled") {
                 self.meo.swizzle(from: #selector(getter: UIView.accessibilityIdentifier),
                                  to: #selector(getter: UIView.swizzledAccessibilityIdentifier),
                                  anyClass: UIView.self)

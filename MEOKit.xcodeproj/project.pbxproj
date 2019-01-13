@@ -307,10 +307,10 @@
 		9BE194F321B6AC48003F9FCF /* temp */ = {
 			isa = PBXGroup;
 			children = (
-				9BE194F421B6AC48003F9FCF /* SampleViewController.swift */,
+				9BE194F721B6AC48003F9FCF /* SampleView.swift */,
 				9BE194F521B6AC48003F9FCF /* SampleView.xib */,
 				9BE194F621B6AC48003F9FCF /* SampleViewController.storyboard */,
-				9BE194F721B6AC48003F9FCF /* SampleView.swift */,
+				9BE194F421B6AC48003F9FCF /* SampleViewController.swift */,
 			);
 			path = temp;
 			sourceTree = "<group>";

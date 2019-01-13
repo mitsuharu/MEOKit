@@ -11,6 +11,8 @@ import UIKit
 /// 余白ありLabel
 @IBDesignable  class PaddingLabel: UILabel {
     
+    public var uuid:String = UUID().uuidString
+    
     public var padding: UIEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8){
         didSet{
             self.drawText(in: self.frame)

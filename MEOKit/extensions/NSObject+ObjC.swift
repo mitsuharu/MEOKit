@@ -46,7 +46,7 @@ public extension MeoExtension where T: NSObject {
         if let temp = self._associatedObject(){
             associatedObj = temp
         }
-        associatedObj.dict[key] = obj
+        associatedObj.dict[self.base.uniquekey(key)] = obj
         
         objc_setAssociatedObject(self.base,
                                  &AssociatedKey,
@@ -61,7 +61,7 @@ public extension MeoExtension where T: NSObject {
     /// - Returns: オブジェクト（Any型）
     public func associated(key: String) -> Any? {
         if let temp = self._associatedObject(){
-            return temp.dict[key]
+            return temp.dict[self.base.uniquekey(key)]
         }
         return nil
     }

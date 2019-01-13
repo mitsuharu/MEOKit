@@ -10,8 +10,8 @@ import UIKit
 
 /// トースター表示を行う
 public class Toast: NSObject {
-
-    private var label: PaddingLabel!
+    
+    private var label: PaddingLabel? = nil
     private let timeInterval: TimeInterval = 2.0
     private let hiddenTimeInterval: TimeInterval = 1.0
     private static var shared: Toast = Toast()
@@ -27,9 +27,12 @@ public class Toast: NSObject {
     }
     
     private func show(text:String){
-        
+
         if let _ = self.label{
-            self.remove(isAnimated: false)
+            self.remove(isAnimated: false) {
+                self.show(text: text)
+            }
+            return
         }
         
         let width = UIScreen.main.bounds.width
@@ -37,34 +40,36 @@ public class Toast: NSObject {
         let w = width * 0.8
         let rect = CGRect(x: 0, y: 0, width: width, height: 16)
         
-        self.label = PaddingLabel(frame: rect)
-        self.label.backgroundColor = UIColor.gray
-        self.label.textColor = UIColor.white
-        self.label.radius = 5
-        self.label.radiusTopRight = true
-        self.label.radiusTopLeft = true
-        self.label.radiusBottomLeft = true
-        self.label.radiusBottomRight = true
-        self.label.numberOfLines = 0
-        self.label.text = text
+        self.label = {
+            let temp = PaddingLabel(frame: rect)
+            temp.backgroundColor = UIColor.gray
+            temp.textColor = UIColor.white
+            temp.radius = 5
+            temp.radiusTopRight = true
+            temp.radiusTopLeft = true
+            temp.radiusBottomLeft = true
+            temp.radiusBottomRight = true
+            temp.numberOfLines = 0
+            temp.text = text
+            
+            let size = temp.sizeThatFits(CGSize(width: w, height: height * 0.8))
+            temp.frame = CGRect(x: (width - size.width)/2.0,
+                                      y: height - size.height - 40,
+                                      width: size.width,
+                                      height: size.height)
+            return temp
+        }()
         
-        let size = self.label.sizeThatFits(CGSize(width: w, height: height * 0.8))
-        self.label.frame = CGRect(x: (width - size.width)/2.0,
-                                  y: height - size.height - 40,
-                                  width: size.width,
-                                  height: size.height)
- 
-        if let window = UIApplication.shared.keyWindow{
-           window.addSubview(self.label)
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + self.timeInterval) {
-            self.remove()
+        if let label = self.label, let window = UIApplication.shared.keyWindow{
+            window.addSubview(label)
+            DispatchQueue.main.asyncAfter(deadline: .now() + self.timeInterval) {
+                self.remove(isAnimated: true)
+            }
         }
     }
     
-    private func remove(isAnimated:Bool = true) {
-
+    private func remove(isAnimated:Bool = true, completion:(()->())? = nil) {
+        
         guard let label = self.label else {
             return
         }
@@ -80,6 +85,9 @@ public class Toast: NSObject {
         }) { (completed) in
             label.removeFromSuperview()
             self.label = nil
+            if let cmp = completion{
+                cmp()
+            }
         }
     }
 }
