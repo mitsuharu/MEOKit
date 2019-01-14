@@ -24,9 +24,9 @@ Toast.show(text: "メッセージ")
 - デフォルトの保存期間は1週間
 
 ```
-let key:String = "hogehoge"
-CachedData.setString("キャッシュデータ", key: key)
-if let str = CachedData.string(key: key){
+let key: String = "hogehoge"
+Cached.add(string: "キャッシュデータ", key: key)
+if let str = Cached.string(key: key){
     print("str \(str)")
 }
 ```
