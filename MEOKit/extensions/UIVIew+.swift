@@ -8,7 +8,6 @@
 
 import UIKit
 
-// hack的なやつは別で分ける
 public extension MeoExtension where T: UIView {
     
     /// 自身をaddしたUIViewControllerを取得する

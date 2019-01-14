@@ -40,7 +40,7 @@ public extension MeoExtension where T: NSObject {
     /// - Parameters:
     ///   - obj: オブジェクト
     ///   - key: キー
-    public func associate(obj: Any?, forKey key: String) {
+    public func associate(obj: Any?, key: String) {
         
         var associatedObj:AssociatedObj = AssociatedObj()
         if let temp = self._associatedObject(){
@@ -83,7 +83,7 @@ public extension MeoExtension where T: NSObject {
     ///
     /// - Parameter key: キー
     public func removeAssociated(key: String)  {
-        self.associate(obj: nil, forKey: key)
+        self.associate(obj: nil, key: key)
     }
     
 }

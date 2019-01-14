@@ -8,7 +8,24 @@
 
 import UIKit
 
+
 public extension MeoExtension where T: UIViewController {
+    
+    /// 自身が表示されているか判定する
+    public var isAppeared: Bool{
+        get{
+            let vc: UIViewController = self.base
+            if let pvc = vc.presentedViewController{
+                return (pvc == vc && (vc.isViewLoaded && vc.view.window != nil))
+            }else if let nc = vc.navigationController{
+                return (nc.visibleViewController == vc)
+            }else if let tc = vc.tabBarController{
+                return (tc.selectedViewController == vc && vc.presentedViewController == nil)
+            }
+            return false
+        }
+    }
+    
 }
 
 extension UIViewController {

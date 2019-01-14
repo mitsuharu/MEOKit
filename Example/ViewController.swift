@@ -46,6 +46,10 @@ class ViewController: UIViewController {
         DLOG()
         dprint("show message if DebugManager.shared.isDebug is true ")
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+    }
 
 }
 
@@ -60,7 +64,7 @@ extension ViewController{
     // associateを確認する
     func sampleAssociate(){
         let key = "associated_key"
-        self.meo.associate(obj: "アソシエイティッドデータ", forKey: key)
+        self.meo.associate(obj: "アソシエイティッドデータ", key: key)
         if let str = self.meo.associated(key: key, type: String.self){
             print("str \(str)")
         }else{
@@ -71,8 +75,8 @@ extension ViewController{
     // キャッシュデータの確認
     func samoleCacheData(){
         let key:String = "keykeykey"
-        CachedData.setString("キャッシュデータ", key: key)
-        if let str = CachedData.string(key: key){
+        Cached.add(string: "キャッシュデータ", key: key)
+        if let str = Cached.string(key: key){
             print("str \(str)")
         }
     }

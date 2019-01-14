@@ -22,7 +22,8 @@
 		9BADA0B621B64F6800501380 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BADA0B521B64F6800501380 /* String+.swift */; };
 		9BADA0BF21B6570A00501380 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BADA0BE21B6570A00501380 /* Toast.swift */; };
 		9BBF5F0021BBFB47008360B5 /* CachedEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBF5EFF21BBFB47008360B5 /* CachedEntity.swift */; };
-		9BBF5F0221BC184F008360B5 /* CachedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBF5F0121BC184F008360B5 /* CachedData.swift */; };
+		9BBF5F0221BC184F008360B5 /* Cached.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBF5F0121BC184F008360B5 /* Cached.swift */; };
+		9BDC921021ECACE200E4346A /* UICollectionViewCell+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDC920F21ECACE200E4346A /* UICollectionViewCell+.swift */; };
 		9BE194BE21B6AA9D003F9FCF /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE194BD21B6AA9D003F9FCF /* PaddingLabel.swift */; };
 		9BE194C621B6AB56003F9FCF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE194C521B6AB56003F9FCF /* AppDelegate.swift */; };
 		9BE194C821B6AB56003F9FCF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE194C721B6AB56003F9FCF /* ViewController.swift */; };
@@ -84,7 +85,8 @@
 		9BADA0B521B64F6800501380 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		9BADA0BE21B6570A00501380 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		9BBF5EFF21BBFB47008360B5 /* CachedEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedEntity.swift; sourceTree = "<group>"; };
-		9BBF5F0121BC184F008360B5 /* CachedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedData.swift; sourceTree = "<group>"; };
+		9BBF5F0121BC184F008360B5 /* Cached.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cached.swift; sourceTree = "<group>"; };
+		9BDC920F21ECACE200E4346A /* UICollectionViewCell+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+.swift"; sourceTree = "<group>"; };
 		9BE194BD21B6AA9D003F9FCF /* PaddingLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		9BE194C321B6AB56003F9FCF /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BE194C521B6AB56003F9FCF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 				9BAD9FEF21B6025D00501380 /* NSObject+.swift */,
 				9B07AE2C21E9163600BB4B70 /* NSObject+ObjC.swift */,
 				9BADA0B521B64F6800501380 /* String+.swift */,
+				9BDC920F21ECACE200E4346A /* UICollectionViewCell+.swift */,
 				9BADA00821B61B6700501380 /* UIColor+.swift */,
 				9BADA00721B61B6700501380 /* UIImage+.swift */,
 				9B07AE2A21E8E01700BB4B70 /* UIResponder+.swift */,
@@ -252,7 +255,7 @@
 			isa = PBXGroup;
 			children = (
 				9BBF5EFF21BBFB47008360B5 /* CachedEntity.swift */,
-				9BBF5F0121BC184F008360B5 /* CachedData.swift */,
+				9BBF5F0121BC184F008360B5 /* Cached.swift */,
 			);
 			path = cache;
 			sourceTree = "<group>";
@@ -524,6 +527,7 @@
 				9BADA00C21B61B6700501380 /* UIImage+.swift in Sources */,
 				9BADA01021B61B6700501380 /* UIVIew+.swift in Sources */,
 				9BADA00E21B61B6700501380 /* UIViewController+.swift in Sources */,
+				9BDC921021ECACE200E4346A /* UICollectionViewCell+.swift in Sources */,
 				9BE194FF21B80409003F9FCF /* UITableView+.swift in Sources */,
 				9BADA00F21B61B6700501380 /* UITableViewCell+.swift in Sources */,
 				9B07AE2B21E8E01700BB4B70 /* UIResponder+.swift in Sources */,
@@ -534,7 +538,7 @@
 				9BADA0BF21B6570A00501380 /* Toast.swift in Sources */,
 				9BADA00D21B61B6700501380 /* UIColor+.swift in Sources */,
 				9BE1950121B80A1C003F9FCF /* Collection+.swift in Sources */,
-				9BBF5F0221BC184F008360B5 /* CachedData.swift in Sources */,
+				9BBF5F0221BC184F008360B5 /* Cached.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
