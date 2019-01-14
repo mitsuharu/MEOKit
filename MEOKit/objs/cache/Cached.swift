@@ -1,5 +1,5 @@
 //
-//  CachedData.swift
+//  Cached.swift
 //  MEOKit
 //
 //  Created by Mitsuhau Emoto on 2018/12/09.
@@ -9,12 +9,12 @@
 import UIKit
 
 /// データをキャッシュする
-public class CachedData: NSObject {
+public class Cached: NSObject {
 
-    private static var shared: CachedData = CachedData()
+    private static var shared: Cached = Cached()
     private var cache: NSCache<AnyObject, AnyObject>!
     private var pathCacheDir : String!
-    private let dirName:String = "CachesByCachedData"
+    private let dirName:String = "CachesByCached"
     
     private override init() {
         super.init()
@@ -83,79 +83,79 @@ public class CachedData: NSObject {
 }
 
 // 公開メソッド
-public extension CachedData{
+public extension Cached{
     
     public static func data(key: String) -> Data?{
-        let cachedData = CachedData.shared
-        guard let cachedEntity = cachedData.cachedEntity(key: key) else {
+        let cached = Cached.shared
+        guard let cachedEntity = cached.cachedEntity(key: key) else {
             return nil
         }
         return cachedEntity.data
     }
     
     public static func string(key: String) -> String?{
-        let cachedData = CachedData.shared
-        guard let cachedEntity = cachedData.cachedEntity(key: key) else {
+        let cached = Cached.shared
+        guard let cachedEntity = cached.cachedEntity(key: key) else {
             return nil
         }
         return cachedEntity.string
     }
     
     public static func image(url: URL) -> UIImage?{
-        return CachedData.image(key: url.absoluteString)
+        return Cached.image(key: url.absoluteString)
     }
     
     public static func image(key: String) -> UIImage?{
-        let cachedData = CachedData.shared
-        guard let cachedEntity = cachedData.cachedEntity(key: key) else {
+        let cached = Cached.shared
+        guard let cachedEntity = cached.cachedEntity(key: key) else {
             return nil
         }
         return cachedEntity.image
     }
     
-    public static func setData(_ data: Data, key:String, validity:CachedValidity = .oneweek){
-        let cachedData = CachedData.shared
+    public static func add(data: Data, key:String, validity:CachedValidity = .oneweek){
+        let cached = Cached.shared
         let cachedEntity:CachedEntity = CachedEntity(data: data, validity: validity)
-        cachedData.setCachedEntity(cachedEntity: cachedEntity, key: key)
+        cached.setCachedEntity(cachedEntity: cachedEntity, key: key)
     }
     
-    public static func setString(_ string: String, key:String, validity:CachedValidity = .oneweek) {
-        let cachedData = CachedData.shared
+    public static func add(string: String, key:String, validity:CachedValidity = .oneweek) {
+        let cached = Cached.shared
         let cachedEntity:CachedEntity = CachedEntity(string: string, validity: validity)
-        cachedData.setCachedEntity(cachedEntity: cachedEntity, key: key)
+        cached.setCachedEntity(cachedEntity: cachedEntity, key: key)
     }
     
-    public static func setImage(_ image: UIImage, url:URL, validity:CachedValidity = .oneweek) {
-        CachedData.setImage(image, key: url.absoluteString, validity:validity)
+    public static func add(image: UIImage, url:URL, validity:CachedValidity = .oneweek) {
+        Cached.add(image: image, key: url.absoluteString, validity:validity)
     }
     
-    public static func setImage(_ image: UIImage, key:String, validity:CachedValidity = .oneweek) {
+    public static func add(image: UIImage, key:String, validity:CachedValidity = .oneweek) {
         var imageFormat:CachedImageFormat = .jpg
         if key.hasSuffix(".jpg") || key.hasSuffix(".jpeg"){
             imageFormat = .jpg
         }else if key.hasSuffix(".png"){
             imageFormat = .png
         }
-        let cachedData = CachedData.shared
+        let cached = Cached.shared
         let cachedEntity:CachedEntity = CachedEntity(image: image,
                                                imageFormat: imageFormat,
                                                validity: validity)
-        cachedData.setCachedEntity(cachedEntity: cachedEntity, key: key)
+        cached.setCachedEntity(cachedEntity: cachedEntity, key: key)
     }
     
     public static func delete(key: String){
-        let cachedData = CachedData.shared
-        cachedData.cache.removeObject(forKey: key.meo.md5 as AnyObject)
-        CachedEntity.delete(path: cachedData.pathForUrl(urlString: key))
+        let cached = Cached.shared
+        cached.cache.removeObject(forKey: key.meo.md5 as AnyObject)
+        CachedEntity.delete(path: cached.pathForUrl(urlString: key))
     }
     
-    public static func deleteCaches(){
-        let cachedData = CachedData.shared
-        cachedData.clearCachesOnMemory()
-        if FileManager.default.fileExists(atPath: cachedData.pathCacheDir){
+    public static func deleteAll(){
+        let cached = Cached.shared
+        cached.clearCachesOnMemory()
+        if FileManager.default.fileExists(atPath: cached.pathCacheDir){
             do{
-                try FileManager.default.removeItem(atPath: cachedData.pathCacheDir)
-                cachedData.makeTempDirs()
+                try FileManager.default.removeItem(atPath: cached.pathCacheDir)
+                cached.makeTempDirs()
             }catch{
             }
         }
