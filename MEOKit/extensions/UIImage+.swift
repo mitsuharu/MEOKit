@@ -11,6 +11,9 @@ import UIKit
 public extension MeoExtension where T: UIImage {
     
     /// 色違い画像を作る
+    ///
+    /// - Parameter color: 色
+    /// - Returns: 指定色を重ねた画像
     public func colored(_ color:UIColor) -> UIImage?{
         
         let image: UIImage = self.base
@@ -34,6 +37,11 @@ public extension MeoExtension where T: UIImage {
     }
     
     /// 色違い画像を作る
+    ///
+    /// - Parameters:
+    ///   - color: 色
+    ///   - blendMode: ブレンドモード
+    /// - Returns: 指定色を重ねた画像
     public func tintColored(_ color:UIColor, blendMode: CGBlendMode = .softLight) -> UIImage?{
         
         let image: UIImage = self.base

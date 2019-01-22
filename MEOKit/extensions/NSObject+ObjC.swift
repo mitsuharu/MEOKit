@@ -79,6 +79,15 @@ public extension MeoExtension where T: NSObject {
         return nil
     }
     
+    
+    /// 連想記録した文字型オブジェクトを取得する
+    ///
+    /// - Parameter key: キー
+    /// - Returns: 文字型
+    public func associatedString(key: String) -> String?{
+        return self.associated(key: key, type: String.self)
+    }
+    
     /// 保存したオブジェクトの削除
     ///
     /// - Parameter key: キー

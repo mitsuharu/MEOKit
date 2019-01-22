@@ -27,6 +27,8 @@ public extension MeoExtension where T == String {
     }
     
     /// 改行ごとに分割する
+    ///
+    /// - Returns: 文字型の配列
     public func parsedByLines() -> [String] {
         var lines: [String] = [String]()
         self.base.enumerateLines { (line, stop) in
@@ -42,6 +44,11 @@ public extension MeoExtension where T == String {
     }
     
     /// 横幅を指定して文字を描画したときの高さを計算する
+    ///
+    /// - Parameters:
+    ///   - width: 横幅
+    ///   - font: フォント
+    /// - Returns: 指定した横幅のときの縦幅
     public func drawnHeight(width:CGFloat, font:UIFont) -> CGFloat {
         
         let size: CGSize = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)
