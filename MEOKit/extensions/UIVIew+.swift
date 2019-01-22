@@ -16,6 +16,9 @@ public extension MeoExtension where T: UIView {
     }
     
     /// autolayoutで組んで生成したViewのサイズを取得する
+    ///
+    /// - Parameter fixedWidth: viewの固定幅．nilのときは自由幅
+    /// - Returns: 生成されるviewサイズ
     public func autolayoutSize(fixedWidth:CGFloat? = nil) -> CGSize{
         /*
          see:【AutoLayout】systemLayoutSizeFittingSizeでもう悩まない！ - Qiita
@@ -25,8 +28,11 @@ public extension MeoExtension where T: UIView {
         let view: UIView = self.base
         var size:CGSize = CGSize.zero
         if let w = fixedWidth{
+            let hor = UILayoutPriority.required
+            let ver = UILayoutPriority.fittingSizeLevel
             size = view.systemLayoutSizeFitting(CGSize(width: w, height: 0),
-                                                withHorizontalFittingPriority: UILayoutPriority.required, verticalFittingPriority: UILayoutPriority.fittingSizeLevel)
+                                                withHorizontalFittingPriority: hor,
+                                                verticalFittingPriority: ver)
         }else{
             size = view.systemLayoutSizeFitting(UIView.layoutFittingExpandedSize)
         }
@@ -34,11 +40,12 @@ public extension MeoExtension where T: UIView {
         let w = CGFloat(ceilf(Float(size.width)))
         let h = CGFloat(ceilf(Float(size.height)))
         let size2:CGSize = CGSize(width: w, height: h)
-        
         return size2
     }
     
     /// view を addSubview したときにサイズも設定する
+    ///
+    /// - Parameter view: 表示するview
     public func addAndFitSubview(_ view:UIView){
         self.base.addSubview(view)
         
@@ -55,6 +62,8 @@ public extension MeoExtension where T: UIView {
     }
     
     /// 背景に画像を設定する
+    ///
+    /// - Parameter image: 背景に設定する画像
     public func setBackgroundImage(image:UIImage){
         UIGraphicsBeginImageContext(self.base.frame.size)
         image.draw(in: self.base.bounds)
@@ -67,7 +76,7 @@ public extension MeoExtension where T: UIView {
     }
     
     /// viewを画像にする
-    public var exportedImage: UIImage?{
+    public var exportImage: UIImage?{
         get{
             UIGraphicsBeginImageContextWithOptions(self.base.bounds.size, false, 0.0)
             guard let context = UIGraphicsGetCurrentContext() else {

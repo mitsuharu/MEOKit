@@ -17,11 +17,15 @@ public class Toast: NSObject {
     private static var shared: Toast = Toast()
     
     /// トースターを表示する
+    ///
+    /// - Parameter text: メッセージ
     public static func show(text:String){
         Toast.shared.show(text: text)
     }
     
     /// トースターを消す
+    ///
+    /// - Parameter isAnimated: アニメーション設定
     public static func remove(isAnimated: Bool = false){
         Toast.shared.remove(isAnimated: isAnimated)
     }

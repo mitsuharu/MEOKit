@@ -10,7 +10,7 @@ import UIKit
 
 extension UIResponder {
     
-    // 指定した型の親を取得する
+    /// 指定した型の親を取得する
     func parent<T: UIResponder>(type: T.Type) -> T? {
         return next as? T ?? next?.parent(type: type)
     }

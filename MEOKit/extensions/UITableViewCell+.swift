@@ -62,7 +62,11 @@ public extension MeoExtension where T: UITableViewCell {
         self.base.accessoryView = nil
     }
     
-    /// スイッチを追加する
+    /// アクセサリービューにスイッチを追加する
+    ///
+    /// - Parameters:
+    ///   - isOn: スイッチの初期isOn
+    ///   - completion: スイッチを入れ替えた時のイベントハンドラー
     public func addSwitch(isOn: Bool, completion:@escaping SwitchHandler) {
         let swtch: UISwitch = UISwitch()
         swtch.isOn = isOn

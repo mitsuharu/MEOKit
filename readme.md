@@ -18,10 +18,9 @@
 Toast.show(text: "メッセージ")
 ```
 
-## CachedData
+## Cached
 
 - データ（Data, String, UIImage）のデータキャッシュを行う
-- デフォルトの保存期間は1週間
 
 ```
 let key: String = "hogehoge"
@@ -30,6 +29,11 @@ if let str = Cached.string(key: key){
     print("str \(str)")
 }
 ```
+
+- デフォルトの保存期間は1週間
+	- キャッシュデータはアプリのcacheフォルダに保存される
+	- データ削除はcacheフォルダの自動削除か手動削除を用いる
+	- データの自動削除は未実装
 
 # Installation
 

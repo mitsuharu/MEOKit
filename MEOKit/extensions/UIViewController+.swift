@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 public extension MeoExtension where T: UIViewController {
     
     /// 自身が表示されているか判定する
