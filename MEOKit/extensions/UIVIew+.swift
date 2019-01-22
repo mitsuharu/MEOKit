@@ -76,7 +76,7 @@ public extension MeoExtension where T: UIView {
     }
     
     /// viewを画像にする
-    public var exportImage: UIImage?{
+    public var exportedImage: UIImage?{
         get{
             UIGraphicsBeginImageContextWithOptions(self.base.bounds.size, false, 0.0)
             guard let context = UIGraphicsGetCurrentContext() else {
