@@ -47,17 +47,38 @@ public extension MeoExtension where T: UIView {
     ///
     /// - Parameter view: 表示するview
     public func addAndFitSubview(_ view:UIView){
-        self.base.addSubview(view)
         
-        view.translatesAutoresizingMaskIntoConstraints = self.base.translatesAutoresizingMaskIntoConstraints
+        let v: UIView = self.base
+        v.addSubview(view)
+        
+        view.translatesAutoresizingMaskIntoConstraints = v.translatesAutoresizingMaskIntoConstraints
         if view.translatesAutoresizingMaskIntoConstraints {
             view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            view.frame = self.base.bounds
+            view.frame = v.bounds
         } else {
-            view.topAnchor.constraint(equalTo: self.base.topAnchor).isActive = true
-            view.bottomAnchor.constraint(equalTo: self.base.bottomAnchor).isActive = true
-            view.leftAnchor.constraint(equalTo: self.base.leftAnchor).isActive = true
-            view.rightAnchor.constraint(equalTo: self.base.rightAnchor).isActive = true
+            
+            var cnsts = [NSLayoutConstraint]()
+            let anchors:[NSLayoutConstraint.Attribute] = [.top, .bottom, .right, .left]
+            for cnst in v.constraints{
+                guard
+                    let f = cnst.firstItem as? UIView,
+                    let s = cnst.secondItem as? UIView else{
+                        continue
+                }
+                if f == view
+                    && s == v
+                    && anchors.contains(cnst.firstAttribute)
+                    && cnst.firstAttribute == cnst.secondAttribute
+                    && cnst.relation == .equal{
+                    cnsts.append(cnst)
+                }
+            }
+            v.removeConstraints(cnsts)
+            
+            view.topAnchor.constraint(equalTo: v.topAnchor).isActive = true
+            view.bottomAnchor.constraint(equalTo: v.bottomAnchor).isActive = true
+            view.leftAnchor.constraint(equalTo: v.leftAnchor).isActive = true
+            view.rightAnchor.constraint(equalTo: v.rightAnchor).isActive = true
         }
     }
     
