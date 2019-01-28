@@ -27,33 +27,26 @@ public extension MeoExtension where T: UITableViewCell {
     /// 自身を reloadRows() する
     ///
     /// - Parameter animation: アニメーション（デフォルトは.automatic）
-    /// - Parameter completion: reloadが完了したら呼ばれる（デフォルトはnil）
-    public func reload(animation: UITableView.RowAnimation = .automatic,
-                       completion: ((Bool)->())? = nil){
+    /// - Returns: reloadできたらtrue
+    @discardableResult
+    public func reload(animation: UITableView.RowAnimation = .automatic) -> Bool{
         guard
             let tv: UITableView = self.tableView,
             let ip: IndexPath = tv.indexPath(for: self.base) else {
-                if let cmp = completion{
-                    cmp(false)
-                }
-                return
+                return false
         }
         
-        DispatchQueue.main.async {
-            var result: Bool = false
-            let sections: Int = tv.numberOfSections
-            let rows: Int = tv.numberOfRows(inSection: sections)
-            let hasIndexPath: Bool = (ip.section < sections) && (ip.row < rows)
-            if let ips = tv.indexPathsForVisibleRows, ips.contains(ip) && hasIndexPath{
-                tv.beginUpdates()
-                tv.reloadRows(at: [ip], with: animation)
-                tv.endUpdates()
-                result = true
-            }
-            if let cmp = completion{
-                cmp(result)
-            }
+        var result: Bool = false
+        let sections: Int = tv.numberOfSections
+        let rows: Int = tv.numberOfRows(inSection: sections)
+        let hasIndexPath: Bool = (ip.section < sections) && (ip.row < rows)
+        if let ips = tv.indexPathsForVisibleRows, ips.contains(ip) && hasIndexPath{
+            tv.beginUpdates()
+            tv.reloadRows(at: [ip], with: animation)
+            tv.endUpdates()
+            result = true
         }
+        return result
     }
     
 }
