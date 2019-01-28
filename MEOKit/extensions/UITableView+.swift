@@ -18,6 +18,16 @@ public extension MeoExtension where T: UITableView {
         self.base.register(nib, forCellReuseIdentifier: className)
     }
     
+    /// data source に指定した indexPath があるか判定する
+    ///
+    /// - Parameter indexPath: インデックスパス
+    /// - Returns: data source にあればtrue，そうでなければfalse
+    public func hasIndexPath(_ indexPath: IndexPath) -> Bool {
+        let sections = self.base.numberOfSections
+        let rows = self.base.numberOfRows(inSection: indexPath.section)
+        return (indexPath.section < sections) && (indexPath.row < rows)
+    }
+    
 }
 
 extension UITableView{
