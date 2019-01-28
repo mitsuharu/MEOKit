@@ -26,19 +26,25 @@ public extension MeoExtension where T: UITableViewCell {
     
     /// 自身を reloadRows() する
     ///
-    /// - Parameter animation: アニメーション（デフォルトは.none）
+    /// - Parameter animation: アニメーション（デフォルトは.automatic）
     /// - Returns: 成功したらtrue（例外はキャッチできない）．
     @discardableResult
-    public func reload(animation: UITableView.RowAnimation = .none) -> Bool{
+    public func reload(animation: UITableView.RowAnimation = .automatic) -> Bool{
         guard
-            let tableView: UITableView = self.tableView,
-            let ip = tableView.indexPath(for: self.base) else {
+            let tv: UITableView = self.tableView,
+            let ip: IndexPath = tv.indexPath(for: self.base) else {
             return false
         }
+        
         var result: Bool = false
-        if let ips = tableView.indexPathsForVisibleRows, ips.contains(ip){
+        let sections: Int = tv.numberOfSections
+        let rows: Int = tv.numberOfRows(inSection: sections)
+        let hasIndexPath: Bool = (ip.section < sections) && (ip.row < rows)
+        if let ips = tv.indexPathsForVisibleRows, ips.contains(ip) && hasIndexPath{
             DispatchQueue.main.async {
-                tableView.reloadRows(at: [ip], with: animation)
+                tv.beginUpdates()
+                tv.reloadRows(at: [ip], with: animation)
+                tv.endUpdates()
             }
             result = true
         }
