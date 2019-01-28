@@ -27,28 +27,33 @@ public extension MeoExtension where T: UITableViewCell {
     /// 自身を reloadRows() する
     ///
     /// - Parameter animation: アニメーション（デフォルトは.automatic）
-    /// - Returns: 成功したらtrue（例外はキャッチできない）．
-    @discardableResult
-    public func reload(animation: UITableView.RowAnimation = .automatic) -> Bool{
+    /// - Parameter completion: reloadが完了したら呼ばれる（デフォルトはnil）
+    public func reload(animation: UITableView.RowAnimation = .automatic,
+                       completion: ((Bool)->())? = nil){
         guard
             let tv: UITableView = self.tableView,
             let ip: IndexPath = tv.indexPath(for: self.base) else {
-            return false
+                if let cmp = completion{
+                    cmp(false)
+                }
+                return
         }
         
-        var result: Bool = false
-        let sections: Int = tv.numberOfSections
-        let rows: Int = tv.numberOfRows(inSection: sections)
-        let hasIndexPath: Bool = (ip.section < sections) && (ip.row < rows)
-        if let ips = tv.indexPathsForVisibleRows, ips.contains(ip) && hasIndexPath{
-            DispatchQueue.main.async {
+        DispatchQueue.main.async {
+            var result: Bool = false
+            let sections: Int = tv.numberOfSections
+            let rows: Int = tv.numberOfRows(inSection: sections)
+            let hasIndexPath: Bool = (ip.section < sections) && (ip.row < rows)
+            if let ips = tv.indexPathsForVisibleRows, ips.contains(ip) && hasIndexPath{
                 tv.beginUpdates()
                 tv.reloadRows(at: [ip], with: animation)
                 tv.endUpdates()
+                result = true
             }
-            result = true
+            if let cmp = completion{
+                cmp(result)
+            }
         }
-        return result
     }
     
 }
