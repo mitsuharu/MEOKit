@@ -43,38 +43,48 @@ public extension MeoExtension where T == String {
         return lines
     }
     
+    /// 文字を描画したときの幅と高さを計算する
+    ///
+    /// - Parameters:
+    ///   - width: 横幅．指定なしの場合は幅も任意
+    ///   - font: フォント
+    /// - Returns: 描画される幅と高さ
+    public func boundingSize(width: CGFloat = CGFloat.greatestFiniteMagnitude,
+                             font: UIFont) -> CGSize {
+        
+        let baseSize: CGSize = CGSize(width: width,
+                                      height: CGFloat.greatestFiniteMagnitude)
+        let attributes = [NSAttributedString.Key.font: font]
+        let options = NSStringDrawingOptions(rawValue:  NSStringDrawingOptions.usesLineFragmentOrigin.rawValue | NSStringDrawingOptions.truncatesLastVisibleLine.rawValue)
+        
+        var width: CGFloat = 0.0
+        var height: CGFloat = 0.0
+        for str in self.parsedByLines(){
+            var tmp: NSString = NSString(string: str)
+            if str.count == 0{
+                tmp = NSString(string: "a")
+            }
+            let rect: CGRect = tmp.boundingRect(with: baseSize,
+                                                options: options,
+                                                attributes: attributes,
+                                                context: nil)
+            height += rect.height
+            width = max(width, rect.width)
+        }
+        height = CGFloat(ceilf(Float(height)))
+        width = CGFloat(ceilf(Float(width)))
+        return CGSize(width: width, height: height)
+    }
+    
     /// 横幅を指定して文字を描画したときの高さを計算する
     ///
     /// - Parameters:
     ///   - width: 横幅
     ///   - font: フォント
     /// - Returns: 指定した横幅のときの縦幅
-    public func drawnHeight(width:CGFloat, font:UIFont) -> CGFloat {
-        
-        let size: CGSize = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)
-        let attrDict = [NSAttributedString.Key.font: font]
-        let options = NSStringDrawingOptions.usesLineFragmentOrigin.rawValue | NSStringDrawingOptions.truncatesLastVisibleLine.rawValue
-        
-        var height: CGFloat = 0
-        for str in self.parsedByLines(){
-            var tempHeight: CGFloat = 0
-            if str.count == 0{
-                let rect:CGRect = NSString(string: "a").boundingRect(with: size,
-                                                                     options: NSStringDrawingOptions(rawValue: options),
-                                                                     attributes: attrDict,
-                                                                     context: nil)
-                tempHeight = rect.height
-            }else{
-                let rect:CGRect = NSString(string: str).boundingRect(with: size,
-                                                                     options: NSStringDrawingOptions(rawValue: options),
-                                                                     attributes: attrDict,
-                                                                     context: nil)
-                tempHeight = rect.height
-            }
-            height += tempHeight
-        }
-        height = CGFloat(ceilf(Float(height)))
-        return height
+    public func boundingHeight(width: CGFloat, font: UIFont) -> CGFloat {
+        let size = self.boundingSize(width: width, font: font)
+        return size.height
     }
     
 }

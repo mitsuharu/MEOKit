@@ -52,10 +52,18 @@ import UIKit
     }
     
     @IBInspectable public var radius: CGFloat = 0.0
-    @IBInspectable public var radiusTopLeft: Bool = false
-    @IBInspectable public var radiusTopRight: Bool = false
-    @IBInspectable public var radiusBottomLeft: Bool = false
-    @IBInspectable public var radiusBottomRight: Bool = false
+    public var isRadius: Bool = false{
+        didSet{
+            self.isRadiusTopLeft = self.isRadius
+            self.isRadiusTopRight = self.isRadius
+            self.isRadiusBottomLeft = self.isRadius
+            self.isRadiusBottomRight = self.isRadius
+        }
+    }
+    @IBInspectable public var isRadiusTopLeft: Bool = false
+    @IBInspectable public var isRadiusTopRight: Bool = false
+    @IBInspectable public var isRadiusBottomLeft: Bool = false
+    @IBInspectable public var isRadiusBottomRight: Bool = false
     
     @IBInspectable public var borderColor: UIColor? = nil {
         didSet{
@@ -92,36 +100,64 @@ import UIKit
     }
     
     override var intrinsicContentSize: CGSize {
-        var contentSize = super.intrinsicContentSize
-        contentSize.height += padding.top + padding.bottom
-        contentSize.width += padding.left + padding.right
-        return contentSize
+        let contentSize = super.intrinsicContentSize
+        return self.fittedSize(size: contentSize)
     }
     
     override func sizeThatFits(_ size: CGSize) -> CGSize {
-        var contentSize = super.sizeThatFits(size)
-        contentSize.width += padding.left + padding.right
-        contentSize.height += padding.top + padding.bottom
-        return contentSize
+        let contentSize = super.sizeThatFits(size)
+        return self.fittedSize(size: contentSize)
+    }
+    
+    // 余白に合うように補正する
+    private func fittedSize(size: CGSize) -> CGSize{
+        
+        var tempSize = size
+        
+        if let str = self.text, str.count > 0{
+ 
+            // 1行の高さ
+            let lineHeight: CGFloat = "a".meo.boundingHeight(width: self.font.pointSize*10.0,
+                                                             font: self.font)
+           
+            var offset: CGFloat = 0
+            if size.height > lineHeight{
+                // 高さが1行より大きい場合は，横幅を調整する
+                // 引数のsizeはviewの大きさであり，描画エリアのサイズが異なるため
+                offset = (self.padding.left + self.padding.right)
+            }
+            
+            let h = str.meo.boundingHeight(width: tempSize.width - offset,
+                                           font: self.font)
+            tempSize.height = h + (self.padding.top + self.padding.bottom)
+            if size.height > lineHeight{
+                tempSize.width =  size.width + (self.padding.left + self.padding.right)
+            }
+        }else{
+            tempSize.height += (self.padding.top + self.padding.bottom)
+            tempSize.width += (self.padding.left + self.padding.right)
+        }
+        
+        return tempSize
     }
     
     func setupRadius(){
         
         var hasCorners: Bool = false
         var corners: UIRectCorner = UIRectCorner()
-        if self.radiusTopLeft{
+        if self.isRadiusTopLeft{
             hasCorners = true
             corners = corners.union(.topLeft)
         }
-        if self.radiusTopRight{
+        if self.isRadiusTopRight{
             hasCorners = true
             corners = corners.union(.topRight)
         }
-        if self.radiusBottomLeft{
+        if self.isRadiusBottomLeft{
             hasCorners = true
             corners = corners.union(.bottomLeft)
         }
-        if self.radiusBottomRight{
+        if self.isRadiusBottomRight{
             hasCorners = true
             corners = corners.union(.bottomRight)
         }

@@ -49,18 +49,15 @@ public class Toast: NSObject {
             temp.backgroundColor = UIColor.gray
             temp.textColor = UIColor.white
             temp.radius = 5
-            temp.radiusTopRight = true
-            temp.radiusTopLeft = true
-            temp.radiusBottomLeft = true
-            temp.radiusBottomRight = true
+            temp.isRadius = true
             temp.numberOfLines = 0
             temp.text = text
             
             let size = temp.sizeThatFits(CGSize(width: w, height: height * 0.8))
             temp.frame = CGRect(x: (width - size.width)/2.0,
-                                      y: height - size.height - 40,
-                                      width: size.width,
-                                      height: size.height)
+                                y: height - size.height - 40,
+                                width: size.width,
+                                height: size.height)
             return temp
         }()
         
