@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "MEOKit"
-  s.version      = "0.2.4"
+  s.version      = "0.2.5"
   s.summary      = "my libraries"
 
   s.description  = <<-DESC
