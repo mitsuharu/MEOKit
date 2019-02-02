@@ -10,7 +10,7 @@ import UIKit
 
 public extension MeoExtension where T: UICollectionViewCell {
     
-    /// 自身をaddしたUITableViewを取得する
+    /// 自身をaddしたUICollectionViewを取得する
     public var collectionView: UICollectionView? {
         return self.base.parent(type: UICollectionView.self)
     }
@@ -29,16 +29,16 @@ public extension MeoExtension where T: UICollectionViewCell {
     @discardableResult
     public func reload() -> Bool{
         guard
-            let collectionView: UICollectionView = self.collectionView,
-            let ip = collectionView.indexPath(for: self.base) else {
+            let cv: UICollectionView = self.collectionView,
+            let ip = cv.indexPath(for: self.base) else {
                 return false
         }
         var result: Bool = false
-        let ips = collectionView.indexPathsForVisibleItems
-        if ips.contains(ip){
-            DispatchQueue.main.async {
-                collectionView.reloadItems(at: [ip])
-            }
+        let sections: Int = cv.numberOfSections
+        let rows: Int = cv.numberOfItems(inSection: sections)
+        let hasIndexPath: Bool = (ip.section < sections) && (ip.row < rows)
+        if cv.indexPathsForVisibleItems.contains(ip) && hasIndexPath{
+            cv.reloadItems(at: [ip])
             result = true
         }
         return result
