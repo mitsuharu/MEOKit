@@ -26,7 +26,7 @@ public protocol MeoExtensionProtocol {
 }
 
 public extension MeoExtensionProtocol {
-    public var meo: MeoExtension<Self> {
+    var meo: MeoExtension<Self> {
         return MeoExtension(self)
     }
 }
@@ -34,6 +34,7 @@ public extension MeoExtensionProtocol {
 // meo を作成する
 extension NSObject : MeoExtensionProtocol{}
 extension String : MeoExtensionProtocol{}
+extension Int : MeoExtensionProtocol{}
 
 //// hogehoge.meo.foo() で追加できる
 //public extension MeoExtension where T: NSObject {

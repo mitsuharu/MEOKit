@@ -40,7 +40,7 @@ public extension MeoExtension where T: NSObject {
     /// - Parameters:
     ///   - obj: オブジェクト
     ///   - key: キー
-    public func associate(obj: Any?, key: String) {
+    func associate(obj: Any?, key: String) {
         
         var associatedObj:AssociatedObj = AssociatedObj()
         if let temp = self._associatedObject(){
@@ -59,7 +59,7 @@ public extension MeoExtension where T: NSObject {
     /// - Parameters:
     ///   - key: キー
     /// - Returns: オブジェクト（Any型）
-    public func associated(key: String) -> Any? {
+    func associated(key: String) -> Any? {
         if let temp = self._associatedObject(){
             return temp.dict[self.base.uniquekey(key)]
         }
@@ -72,7 +72,7 @@ public extension MeoExtension where T: NSObject {
     ///   - key: キー
     ///   - type: 返り値の型を指定する(String.self など）
     /// - Returns: オブジェクト
-    public func associated<T:Any>(key: String, type: T.Type) -> T? {
+    func associated<T:Any>(key: String, type: T.Type) -> T? {
         if let obj = self.associated(key: key){
             return (obj as? T) ?? nil
         }
@@ -84,14 +84,14 @@ public extension MeoExtension where T: NSObject {
     ///
     /// - Parameter key: キー
     /// - Returns: 文字型
-    public func associatedString(key: String) -> String?{
+    func associatedString(key: String) -> String?{
         return self.associated(key: key, type: String.self)
     }
     
     /// 保存したオブジェクトの削除
     ///
     /// - Parameter key: キー
-    public func removeAssociated(key: String)  {
+    func removeAssociated(key: String)  {
         self.associate(obj: nil, key: key)
     }
     
@@ -126,7 +126,7 @@ public extension MeoExtension where T: NSObject {
     ///   - toMethod: 入れ替えるメソッドのセレクター ```#selector(viewDidAppear2(_:))```
     ///   - anyClass: そのメソッドを持つクラス（デフォルトnilで自動設定する）．```self.classForCoder``` や ```UIView.self ``` など
     ///
-    public func swizzle(from fromMethod: Selector,
+    func swizzle(from fromMethod: Selector,
                         to toMethod: Selector,
                         anyClass: AnyClass? = nil){
         var cls:AnyClass = self.base.classForCoder

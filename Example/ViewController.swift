@@ -170,8 +170,6 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate{
             self.sampleViews()
         case .switchOnCell:
             break
-        default:
-            break
         }
     }
     

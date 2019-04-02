@@ -13,7 +13,7 @@ public extension Collection {
     /// 配列範囲を考慮して値を取得する．
     ///
     /// - Parameter index: 配列要素番号
-    public subscript(safe index: Index) -> Element? {
+    subscript(safe index: Index) -> Element? {
         if startIndex <= index && index < endIndex{
             return self[index]
         }

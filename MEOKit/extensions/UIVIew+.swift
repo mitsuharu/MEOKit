@@ -11,7 +11,7 @@ import UIKit
 public extension MeoExtension where T: UIView {
     
     /// 自身をaddしたUIViewControllerを取得する
-    public var viewController: UIViewController?{
+    var viewController: UIViewController?{
         return self.base.parent(type: UIViewController.self)
     }
     
@@ -19,7 +19,7 @@ public extension MeoExtension where T: UIView {
     ///
     /// - Parameter fixedWidth: viewの固定幅．nilのときは自由幅
     /// - Returns: 生成されるviewサイズ
-    public func autolayoutSize(fixedWidth:CGFloat? = nil) -> CGSize{
+    func autolayoutSize(fixedWidth:CGFloat? = nil) -> CGSize{
         /*
          see:【AutoLayout】systemLayoutSizeFittingSizeでもう悩まない！ - Qiita
          https://qiita.com/netetahito/items/8b363d4c7fe5f1ca5636
@@ -46,7 +46,7 @@ public extension MeoExtension where T: UIView {
     /// view を addSubview したときにサイズも設定する
     ///
     /// - Parameter view: 表示するview
-    public func addAndFitSubview(_ view:UIView){
+    func addAndFitSubview(_ view:UIView){
         
         let v: UIView = self.base
         v.addSubview(view)
@@ -85,7 +85,7 @@ public extension MeoExtension where T: UIView {
     /// 背景に画像を設定する
     ///
     /// - Parameter image: 背景に設定する画像
-    public func setBackgroundImage(image:UIImage){
+    func setBackgroundImage(image:UIImage){
         UIGraphicsBeginImageContext(self.base.frame.size)
         image.draw(in: self.base.bounds)
         let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
@@ -97,7 +97,7 @@ public extension MeoExtension where T: UIView {
     }
     
     /// viewを画像にする
-    public var exportedImage: UIImage?{
+    var exportedImage: UIImage?{
         get{
             UIGraphicsBeginImageContextWithOptions(self.base.bounds.size, false, 0.0)
             guard let context = UIGraphicsGetCurrentContext() else {

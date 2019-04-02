@@ -27,13 +27,13 @@ public func HEXCOLOR(_ hexCode: String)  -> UIColor{
 public extension MeoExtension where T: UIColor {
     
     /// ダークカラーを生成する
-    public var darkColor: UIColor{
+    var darkColor: UIColor{
         let color = UIColor(white: 0.0, alpha: 0.5)
         return self.blend(color: color, weight: 0.5)
     }
     
     /// 色を合成する
-    public func blend(color: UIColor, weight:CGFloat) -> UIColor{
+    func blend(color: UIColor, weight:CGFloat) -> UIColor{
         
         var r0: CGFloat = 1.0
         var g0: CGFloat = 1.0

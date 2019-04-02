@@ -13,23 +13,25 @@ import CommonCrypto
 public extension MeoExtension where T == String {
     
     /// MD5で暗号化する
-    public var md5: String {
-        let data = self.base.data(using: .utf8)!
-        var digest = [UInt8](repeating: 0, count: Int(CC_MD5_DIGEST_LENGTH))
-        _ = data.withUnsafeBytes{CC_MD5($0, CC_LONG(data.count), &digest)}
-        let crypt = digest.map{String(format: "%02x", $0)}.joined(separator: "")
-        return crypt
+    var md5: String {
+        let data = Data(self.base.utf8)
+        let hash = data.withUnsafeBytes { (bytes: UnsafeRawBufferPointer) -> [UInt8] in
+            var hash = [UInt8](repeating: 0, count: Int(CC_MD5_DIGEST_LENGTH))
+            CC_MD5(bytes.baseAddress, CC_LONG(data.count), &hash)
+            return hash
+        }
+        return hash.map { String(format: "%02x", $0) }.joined()
     }
     
     /// ローカライズファイルを読み込む
-    public var localized: String {
+    var localized: String {
         return NSLocalizedString(self.base, comment: self.base)
     }
     
     /// 改行ごとに分割する
     ///
     /// - Returns: 文字型の配列
-    public func parsedByLines() -> [String] {
+    func parsedByLines() -> [String] {
         var lines: [String] = [String]()
         self.base.enumerateLines { (line, stop) in
             lines.append(line)
@@ -49,7 +51,7 @@ public extension MeoExtension where T == String {
     ///   - width: 横幅．指定なしの場合は幅も任意
     ///   - font: フォント
     /// - Returns: 描画される幅と高さ
-    public func boundingSize(width: CGFloat = CGFloat.greatestFiniteMagnitude,
+    func boundingSize(width: CGFloat = CGFloat.greatestFiniteMagnitude,
                              font: UIFont) -> CGSize {
         
         let baseSize: CGSize = CGSize(width: width,
@@ -82,9 +84,49 @@ public extension MeoExtension where T == String {
     ///   - width: 横幅
     ///   - font: フォント
     /// - Returns: 指定した横幅のときの縦幅
-    public func boundingHeight(width: CGFloat, font: UIFont) -> CGFloat {
+    func boundingHeight(width: CGFloat, font: UIFont) -> CGFloat {
         let size = self.boundingSize(width: width, font: font)
         return size.height
     }
     
+    /// 部分文字列を取得する
+    ///
+    /// - Parameters:
+    ///   - index: 開始位置
+    ///   - length: 文字列の長さ
+    /// - Returns: 文字列
+    func sub(index: Int, length: Int) -> String? {
+        let str: String = self.base
+        if index < str.count && (index + length) <= str.count{
+            let startIndex = str.index(str.startIndex, offsetBy: index)
+            let endIndex = str.index(startIndex, offsetBy: length)
+            return String(str[startIndex..<endIndex])
+        }
+        return nil
+    }
+    
+    /// 部分文字列を取得する
+    ///
+    /// - Parameter range: NSRange型で開始位置と長さを指定する
+    /// - Returns: 文字列
+    func sub(range: NSRange) -> String?{
+        return self.sub(index: range.location, length: range.length)
+    }
+    
+    /// 正規表現でマッチする範囲を取得する
+    ///
+    /// - Parameter pattern: パターン（例えば，数字なら"\\d"）
+    /// - Returns: NSRangeの配列
+    func rangesByRegex(pattern: String) -> [NSRange]{
+        let str: String = self.base
+        guard let regex = try? NSRegularExpression(pattern: pattern) else {
+            return []
+        }
+        let r = NSRange(location: 0, length: str.count)
+        let matches:[NSTextCheckingResult] = regex.matches(in: str, range: r)
+        if matches.count == 0{
+            return []
+        }
+        return matches.map{$0.range}
+    }
 }
