@@ -13,7 +13,7 @@ public extension MeoExtension where T: UITableView {
     /// cellを登録する（クラス名とnibファイル名は同一と想定する）
     ///
     /// - Parameter className: クラス名
-    public func registerCell(className: String) {
+    func registerCell(className: String) {
         let nib = UINib(nibName: className, bundle: Bundle.main)
         self.base.register(nib, forCellReuseIdentifier: className)
     }
@@ -22,7 +22,7 @@ public extension MeoExtension where T: UITableView {
     ///
     /// - Parameter indexPath: インデックスパス
     /// - Returns: data source にあればtrue，そうでなければfalse
-    public func hasIndexPath(_ indexPath: IndexPath) -> Bool {
+    func hasIndexPath(_ indexPath: IndexPath) -> Bool {
         let sections = self.base.numberOfSections
         let rows = self.base.numberOfRows(inSection: indexPath.section)
         return (indexPath.section < sections) && (indexPath.row < rows)

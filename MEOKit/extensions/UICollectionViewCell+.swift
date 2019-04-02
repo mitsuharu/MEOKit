@@ -11,12 +11,12 @@ import UIKit
 public extension MeoExtension where T: UICollectionViewCell {
     
     /// 自身をaddしたUICollectionViewを取得する
-    public var collectionView: UICollectionView? {
+    var collectionView: UICollectionView? {
         return self.base.parent(type: UICollectionView.self)
     }
     
     /// 自身のIndexPathを取得する
-    public var indexPath: IndexPath? {
+    var indexPath: IndexPath? {
         guard let cv: UICollectionView = self.collectionView else {
             return nil
         }
@@ -27,7 +27,7 @@ public extension MeoExtension where T: UICollectionViewCell {
     ///
     /// - Returns: 成功したらtrue（例外はキャッチできない）．
     @discardableResult
-    public func reload() -> Bool{
+    func reload() -> Bool{
         guard
             let cv: UICollectionView = self.collectionView,
             let ip = cv.indexPath(for: self.base) else {

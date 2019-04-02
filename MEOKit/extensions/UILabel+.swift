@@ -15,7 +15,7 @@ public extension MeoExtension where T : UILabel {
     ///
     /// - Parameter width: 指定幅のときは設定する．幅も求める場合は指定しない．．
     /// - Returns: 描画されるサイズ
-    public func boundingSize(width: CGFloat = CGFloat.greatestFiniteMagnitude) -> CGSize {
+    func boundingSize(width: CGFloat = CGFloat.greatestFiniteMagnitude) -> CGSize {
         var size: CGSize = CGSize.zero
         let label: UILabel = self.base
         if let str = label.text{
@@ -28,7 +28,7 @@ public extension MeoExtension where T : UILabel {
     ///
     /// - Parameter width: 指定幅
     /// - Returns: 高さ
-    public func boundingHeight(width: CGFloat) -> CGFloat {
+    func boundingHeight(width: CGFloat) -> CGFloat {
          let size = self.boundingSize(width: width)
         return size.height
     }
