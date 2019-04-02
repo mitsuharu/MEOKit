@@ -34,6 +34,7 @@ public extension MeoExtensionProtocol {
 // meo を作成する
 extension NSObject : MeoExtensionProtocol{}
 extension String : MeoExtensionProtocol{}
+extension Int : MeoExtensionProtocol{}
 
 //// hogehoge.meo.foo() で追加できる
 //public extension MeoExtension where T: NSObject {

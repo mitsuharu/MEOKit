@@ -61,10 +61,19 @@ public class Toast: NSObject {
             return temp
         }()
         
-        if let label = self.label, let window = UIApplication.shared.keyWindow{
-            window.addSubview(label)
-            DispatchQueue.main.asyncAfter(deadline: .now() + self.timeInterval) {
-                self.remove(isAnimated: true)
+        if let label = self.label{
+            
+            var view: UIView? = nil
+            if let vc = UIViewController.forefront(){
+                view = vc.view
+            }else if let window = UIApplication.shared.keyWindow{
+                view = window
+            }
+            if let v = view{
+                v.addSubview(label)
+                DispatchQueue.main.asyncAfter(deadline: .now() + self.timeInterval) {
+                    self.remove(isAnimated: true)
+                }
             }
         }
     }

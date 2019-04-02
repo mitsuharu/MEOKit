@@ -1,11 +1,11 @@
 Pod::Spec.new do |s|
 
   s.name         = "MEOKit"
-  s.version      = "0.2.5"
+  s.version      = "0.3.0"
   s.summary      = "my libraries"
 
   s.description  = <<-DESC
-		   - add extensions
+		   - Swift5
                    DESC
 
   s.homepage     = "https://github.com/mitsuharu/MEOKit"

@@ -89,4 +89,44 @@ public extension MeoExtension where T == String {
         return size.height
     }
     
+    /// 部分文字列を取得する
+    ///
+    /// - Parameters:
+    ///   - index: 開始位置
+    ///   - length: 文字列の長さ
+    /// - Returns: 文字列
+    func sub(index: Int, length: Int) -> String? {
+        let str: String = self.base
+        if index < str.count && (index + length) <= str.count{
+            let startIndex = str.index(str.startIndex, offsetBy: index)
+            let endIndex = str.index(startIndex, offsetBy: length)
+            return String(str[startIndex..<endIndex])
+        }
+        return nil
+    }
+    
+    /// 部分文字列を取得する
+    ///
+    /// - Parameter range: NSRange型で開始位置と長さを指定する
+    /// - Returns: 文字列
+    func sub(range: NSRange) -> String?{
+        return self.sub(index: range.location, length: range.length)
+    }
+    
+    /// 正規表現でマッチする範囲を取得する
+    ///
+    /// - Parameter pattern: パターン（例えば，数字なら"\\d"）
+    /// - Returns: NSRangeの配列
+    func rangesByRegex(pattern: String) -> [NSRange]{
+        let str: String = self.base
+        guard let regex = try? NSRegularExpression(pattern: pattern) else {
+            return []
+        }
+        let r = NSRange(location: 0, length: str.count)
+        let matches:[NSTextCheckingResult] = regex.matches(in: str, range: r)
+        if matches.count == 0{
+            return []
+        }
+        return matches.map{$0.range}
+    }
 }

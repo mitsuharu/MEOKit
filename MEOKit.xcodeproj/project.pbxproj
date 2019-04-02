@@ -41,6 +41,8 @@
 		9BE194FD21B7F09B003F9FCF /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE194FC21B7F09B003F9FCF /* Extension.swift */; };
 		9BE194FF21B80409003F9FCF /* UITableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE194FE21B80409003F9FCF /* UITableView+.swift */; };
 		9BE1950121B80A1C003F9FCF /* Collection+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE1950021B80A1C003F9FCF /* Collection+.swift */; };
+		9BFF23EC22538392003DB376 /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFF23EB22538392003DB376 /* Int+.swift */; };
+		9BFF23F022538606003DB376 /* Attributed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFF23EF22538606003DB376 /* Attributed.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +112,8 @@
 		9BE194FC21B7F09B003F9FCF /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		9BE194FE21B80409003F9FCF /* UITableView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+.swift"; sourceTree = "<group>"; };
 		9BE1950021B80A1C003F9FCF /* Collection+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+.swift"; sourceTree = "<group>"; };
+		9BFF23EB22538392003DB376 /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
+		9BFF23EF22538606003DB376 /* Attributed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attributed.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -212,6 +216,7 @@
 			children = (
 				9BE1950021B80A1C003F9FCF /* Collection+.swift */,
 				9BE194FC21B7F09B003F9FCF /* Extension.swift */,
+				9BFF23EB22538392003DB376 /* Int+.swift */,
 				9BAD9FEF21B6025D00501380 /* NSObject+.swift */,
 				9B07AE2C21E9163600BB4B70 /* NSObject+ObjC.swift */,
 				9BADA0B521B64F6800501380 /* String+.swift */,
@@ -239,9 +244,10 @@
 		9BADA0BC21B656DF00501380 /* objs */ = {
 			isa = PBXGroup;
 			children = (
-				9B6989CA21C66BE100E687AF /* debug */,
 				9BBF5EFE21BBFAE5008360B5 /* cache */,
+				9B6989CA21C66BE100E687AF /* debug */,
 				9BADA0BD21B656FA00501380 /* toast */,
+				9BFF23EE225385E9003DB376 /* util */,
 			);
 			path = objs;
 			sourceTree = "<group>";
@@ -319,6 +325,14 @@
 				9BE194F421B6AC48003F9FCF /* SampleViewController.swift */,
 			);
 			path = temp;
+			sourceTree = "<group>";
+		};
+		9BFF23EE225385E9003DB376 /* util */ = {
+			isa = PBXGroup;
+			children = (
+				9BFF23EF22538606003DB376 /* Attributed.swift */,
+			);
+			path = util;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -534,9 +548,11 @@
 				9BADA01021B61B6700501380 /* UIVIew+.swift in Sources */,
 				9BAB41B82205A2C700B988C2 /* UILabel+.swift in Sources */,
 				9BADA00E21B61B6700501380 /* UIViewController+.swift in Sources */,
+				9BFF23EC22538392003DB376 /* Int+.swift in Sources */,
 				9BDC921021ECACE200E4346A /* UICollectionViewCell+.swift in Sources */,
 				9BE194FF21B80409003F9FCF /* UITableView+.swift in Sources */,
 				9BADA00F21B61B6700501380 /* UITableViewCell+.swift in Sources */,
+				9BFF23F022538606003DB376 /* Attributed.swift in Sources */,
 				9B07AE2B21E8E01700BB4B70 /* UIResponder+.swift in Sources */,
 				9BE194FD21B7F09B003F9FCF /* Extension.swift in Sources */,
 				9BADA0B621B64F6800501380 /* String+.swift in Sources */,
