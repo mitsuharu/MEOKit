@@ -12,12 +12,12 @@ import ObjectiveC
 public extension MeoExtension where T: UITableViewCell {
     
     /// 自身をaddしたUITableViewを取得する
-    public var tableView: UITableView? {
+    var tableView: UITableView? {
         return self.base.parent(type: UITableView.self)
     }
     
     /// 自身のIndexPathを取得する
-    public var indexPath: IndexPath? {
+    var indexPath: IndexPath? {
         guard let tv: UITableView = self.tableView else {
             return nil
         }
@@ -29,7 +29,7 @@ public extension MeoExtension where T: UITableViewCell {
     /// - Parameter animation: アニメーション（デフォルトは.automatic）
     /// - Returns: reloadできたらtrue
     @discardableResult
-    public func reload(animation: UITableView.RowAnimation = .automatic) -> Bool{
+    func reload(animation: UITableView.RowAnimation = .automatic) -> Bool{
         guard
             let tv: UITableView = self.tableView,
             let ip: IndexPath = tv.indexPath(for: self.base) else {
@@ -61,7 +61,7 @@ private var switchSelectorKey = "switchSelectorKey"
 public extension MeoExtension where T: UITableViewCell {
     
     /// 掃除
-    public func removeAccessoryView() {
+    func removeAccessoryView() {
         self.removeSwith()
         self.base.accessoryView = nil
     }
@@ -71,7 +71,7 @@ public extension MeoExtension where T: UITableViewCell {
     /// - Parameters:
     ///   - isOn: スイッチの初期isOn
     ///   - completion: スイッチを入れ替えた時のイベントハンドラー
-    public func addSwitch(isOn: Bool, completion:@escaping SwitchHandler) {
+    func addSwitch(isOn: Bool, completion:@escaping SwitchHandler) {
         let swtch: UISwitch = UISwitch()
         swtch.isOn = isOn
         swtch.addTarget(self.base,
@@ -84,7 +84,7 @@ public extension MeoExtension where T: UITableViewCell {
     }
     
     /// スイッチの削除
-    public func removeSwith()  {
+    func removeSwith()  {
         objc_setAssociatedObject(self.base,
                                  &switchSelectorKey,
                                  nil,

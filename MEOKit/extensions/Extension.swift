@@ -26,7 +26,7 @@ public protocol MeoExtensionProtocol {
 }
 
 public extension MeoExtensionProtocol {
-    public var meo: MeoExtension<Self> {
+    var meo: MeoExtension<Self> {
         return MeoExtension(self)
     }
 }

@@ -11,7 +11,7 @@ import UIKit
 public extension MeoExtension where T: UIViewController {
     
     /// 自身が表示されているか判定する
-    public var isAppeared: Bool{
+    var isAppeared: Bool{
         get{
             let vc: UIViewController = self.base
             if let pvc = vc.presentedViewController{

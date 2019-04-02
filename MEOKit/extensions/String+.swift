@@ -13,23 +13,25 @@ import CommonCrypto
 public extension MeoExtension where T == String {
     
     /// MD5で暗号化する
-    public var md5: String {
-        let data = self.base.data(using: .utf8)!
-        var digest = [UInt8](repeating: 0, count: Int(CC_MD5_DIGEST_LENGTH))
-        _ = data.withUnsafeBytes{CC_MD5($0, CC_LONG(data.count), &digest)}
-        let crypt = digest.map{String(format: "%02x", $0)}.joined(separator: "")
-        return crypt
+    var md5: String {
+        let data = Data(self.base.utf8)
+        let hash = data.withUnsafeBytes { (bytes: UnsafeRawBufferPointer) -> [UInt8] in
+            var hash = [UInt8](repeating: 0, count: Int(CC_MD5_DIGEST_LENGTH))
+            CC_MD5(bytes.baseAddress, CC_LONG(data.count), &hash)
+            return hash
+        }
+        return hash.map { String(format: "%02x", $0) }.joined()
     }
     
     /// ローカライズファイルを読み込む
-    public var localized: String {
+    var localized: String {
         return NSLocalizedString(self.base, comment: self.base)
     }
     
     /// 改行ごとに分割する
     ///
     /// - Returns: 文字型の配列
-    public func parsedByLines() -> [String] {
+    func parsedByLines() -> [String] {
         var lines: [String] = [String]()
         self.base.enumerateLines { (line, stop) in
             lines.append(line)
@@ -49,7 +51,7 @@ public extension MeoExtension where T == String {
     ///   - width: 横幅．指定なしの場合は幅も任意
     ///   - font: フォント
     /// - Returns: 描画される幅と高さ
-    public func boundingSize(width: CGFloat = CGFloat.greatestFiniteMagnitude,
+    func boundingSize(width: CGFloat = CGFloat.greatestFiniteMagnitude,
                              font: UIFont) -> CGSize {
         
         let baseSize: CGSize = CGSize(width: width,
@@ -82,7 +84,7 @@ public extension MeoExtension where T == String {
     ///   - width: 横幅
     ///   - font: フォント
     /// - Returns: 指定した横幅のときの縦幅
-    public func boundingHeight(width: CGFloat, font: UIFont) -> CGFloat {
+    func boundingHeight(width: CGFloat, font: UIFont) -> CGFloat {
         let size = self.boundingSize(width: width, font: font)
         return size.height
     }

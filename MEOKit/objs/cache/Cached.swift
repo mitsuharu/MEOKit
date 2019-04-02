@@ -85,7 +85,7 @@ public class Cached: NSObject {
 // 公開メソッド
 public extension Cached{
     
-    public static func data(key: String) -> Data?{
+    static func data(key: String) -> Data?{
         let cached = Cached.shared
         guard let cachedEntity = cached.cachedEntity(key: key) else {
             return nil
@@ -93,7 +93,7 @@ public extension Cached{
         return cachedEntity.data
     }
     
-    public static func string(key: String) -> String?{
+    static func string(key: String) -> String?{
         let cached = Cached.shared
         guard let cachedEntity = cached.cachedEntity(key: key) else {
             return nil
@@ -101,11 +101,11 @@ public extension Cached{
         return cachedEntity.string
     }
     
-    public static func image(url: URL) -> UIImage?{
+    static func image(url: URL) -> UIImage?{
         return Cached.image(key: url.absoluteString)
     }
     
-    public static func image(key: String) -> UIImage?{
+    static func image(key: String) -> UIImage?{
         let cached = Cached.shared
         guard let cachedEntity = cached.cachedEntity(key: key) else {
             return nil
@@ -113,23 +113,23 @@ public extension Cached{
         return cachedEntity.image
     }
     
-    public static func add(data: Data, key:String, validity:CachedValidity = .oneweek){
+    static func add(data: Data, key:String, validity:CachedValidity = .oneweek){
         let cached = Cached.shared
         let cachedEntity:CachedEntity = CachedEntity(data: data, validity: validity)
         cached.setCachedEntity(cachedEntity: cachedEntity, key: key)
     }
     
-    public static func add(string: String, key:String, validity:CachedValidity = .oneweek) {
+    static func add(string: String, key:String, validity:CachedValidity = .oneweek) {
         let cached = Cached.shared
         let cachedEntity:CachedEntity = CachedEntity(string: string, validity: validity)
         cached.setCachedEntity(cachedEntity: cachedEntity, key: key)
     }
     
-    public static func add(image: UIImage, url:URL, validity:CachedValidity = .oneweek) {
+    static func add(image: UIImage, url:URL, validity:CachedValidity = .oneweek) {
         Cached.add(image: image, key: url.absoluteString, validity:validity)
     }
     
-    public static func add(image: UIImage, key:String, validity:CachedValidity = .oneweek) {
+    static func add(image: UIImage, key:String, validity:CachedValidity = .oneweek) {
         var imageFormat:CachedImageFormat = .jpg
         if key.hasSuffix(".jpg") || key.hasSuffix(".jpeg"){
             imageFormat = .jpg
@@ -143,13 +143,13 @@ public extension Cached{
         cached.setCachedEntity(cachedEntity: cachedEntity, key: key)
     }
     
-    public static func delete(key: String){
+    static func delete(key: String){
         let cached = Cached.shared
         cached.cache.removeObject(forKey: key.meo.md5 as AnyObject)
         CachedEntity.delete(path: cached.pathForUrl(urlString: key))
     }
     
-    public static func deleteAll(){
+    static func deleteAll(){
         let cached = Cached.shared
         cached.clearCachesOnMemory()
         if FileManager.default.fileExists(atPath: cached.pathCacheDir){

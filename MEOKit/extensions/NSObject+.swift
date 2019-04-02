@@ -11,7 +11,7 @@ import UIKit
 public extension MeoExtension where T: NSObject {
     
     /// クラス名を取得する
-    public var className: String {
+    var className: String {
         get {
             var name = String(describing: type(of: self.base))
             if let range = name.range(of: ".Type") {
@@ -22,7 +22,7 @@ public extension MeoExtension where T: NSObject {
     }
     
     /// クラスの変数などを文字列で出力する
-    public var classDescription : String {
+    var classDescription : String {
         let mirror = Mirror(reflecting: self.base)
         let arr = mirror.children.map { element -> String in
             let key = element.label ?? "Unknown"
@@ -43,12 +43,12 @@ private var onceKeys = [String]()
 public extension MeoExtension where T: NSObject {
     
     /// once処理を再び行いたい場合のクリア
-    public func clearOnceKeys(){
+    func clearOnceKeys(){
         onceKeys.removeAll()
     }
     
     /// once処理を行ったのか確認
-    public func isOnced(key: String) -> Bool{
+    func isOnced(key: String) -> Bool{
         return onceKeys.contains(self.base.uniquekey(key))
     }
     
@@ -57,7 +57,7 @@ public extension MeoExtension where T: NSObject {
     /// - Parameters:
     ///   - key: キー
     ///   - block: 行いたい処理
-    public func once(key: String, block:()->()){
+    func once(key: String, block:()->()){
         // 排他制御を有効にする
         objc_sync_enter(self.base)
         defer {
