@@ -22,7 +22,7 @@ public extension MeoExtension where T: NSObject {
     }
     
     /// クラスの変数などを文字列で出力する
-    var classDescription : String {
+    var classDescription: String {
         let mirror = Mirror(reflecting: self.base)
         let arr = mirror.children.map { element -> String in
             let key = element.label ?? "Unknown"

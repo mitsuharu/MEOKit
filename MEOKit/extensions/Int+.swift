@@ -20,6 +20,5 @@ public extension MeoExtension where T == Int {
         return formatter.string(from: num)!
     }
 
-
 }
 
