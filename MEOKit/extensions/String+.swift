@@ -129,4 +129,28 @@ public extension MeoExtension where T == String {
         }
         return matches.map{$0.range}
     }
+    
+}
+
+
+extension String {
+
+    /// デバッグ用の定型文
+    static func meoDebugPhrase() -> String{
+        return "祇園精舎の鐘の声、諸行無常の響きあり。沙羅双樹の花の色、盛者必衰の理をあらはす。おごれる人も久しからず。ただ春の夜の夢のごとし。たけき者も遂にはほろびぬ、ひとへに風の前の塵に同じ。 "
+    }
+    
+    /// ランダムな英数字の文字列を生成する
+    ///
+    /// - Parameter length: 文字列の長さ．デフォルトは32，0の時は1~64文字の任意の長さ
+    /// - Returns: ランダムな英数字の文字列
+    static func meoRandom(_ length: Int = 32) -> String {
+        var len: Int = length
+        if len == 0{
+            len = Int.random(in: 1..<64)
+        }
+        let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        return String((0..<len).map{ _ in letters.randomElement()! })
+    }
+    
 }
